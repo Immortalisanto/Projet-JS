@@ -29,6 +29,7 @@ export async function generateFilters(filters) {
 
     // Création du bouton "TOUS"
     const buttonAll = document.createElement("button");
+    buttonAll.setAttribute("class", "buttonAll");
     buttonAll.innerText = "Tous";
 
     // Rattachement du bouton "Tous" au DOM

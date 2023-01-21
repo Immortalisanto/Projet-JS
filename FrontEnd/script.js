@@ -8,3 +8,13 @@ const filters = await fetch("http://localhost:5678/api/categories").then(filters
 
 await generateFilters(filters);
 await generateWorks(works);
+
+// Paramétrage des boutons filtres
+
+// Bouton Tous
+const buttonAll = document.querySelector(".buttonAll");
+buttonAll.addEventListener("click", function() {
+    const sectionGallery = document.querySelector(".gallery");
+    sectionGallery.innerHTML = "";
+    generateWorks(works);
+});
