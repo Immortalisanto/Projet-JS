@@ -24,3 +24,31 @@ export async function generateWorks() {
         sectionGallery.appendChild(figureWork);
     };
 };
+
+// Fonction pour la génération des filtres
+export async function generateFilters() {
+
+    // Récupération des différentes catégories
+    const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
+
+    // Génération de tous les filtres
+
+    // Création du bouton "TOUS"
+    const buttonAll = document.createElement("button");
+    buttonAll.innerText = "Tous";
+
+    // Rattachement du bouton "Tous" au DOM
+    const sectionFilters = document.querySelector(".filters");
+    sectionFilters.appendChild(buttonAll);
+
+    // Boucle pour les autres filtres
+    for (let filter of filters) {
+
+        // Construction d'un filtre
+        const filterButton = document.createElement("button");
+        filterButton.innerText = filter.name;
+
+        // Rattachement au DOM
+        sectionFilters.appendChild(filterButton);
+    };
+};
