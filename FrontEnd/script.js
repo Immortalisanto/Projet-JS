@@ -18,3 +18,36 @@ buttonAll.addEventListener("click", function() {
     sectionGallery.innerHTML = "";
     generateWorks(works);
 });
+
+// Bouton Objets
+const buttonObjects = document.querySelector(".Objets");
+buttonObjects.addEventListener("click", function() {
+    const filteredWorks = works.filter(function(work) {
+        return work.categoryId === 1;
+    })
+    const sectionGallery = document.querySelector(".gallery");
+    sectionGallery.innerHTML = "";
+    generateWorks(filteredWorks);
+});
+
+// Bouton Appartements
+const buttonApartments = document.querySelector(".Appartements");
+buttonApartments.addEventListener("click", function() {
+    const filteredWorks = works.filter(function(work) {
+        return work.categoryId === 2;
+    })
+    const sectionGallery = document.querySelector(".gallery");
+    sectionGallery.innerHTML = "";
+    generateWorks(filteredWorks);
+});
+
+// Bouton Hotels & restaurants
+const buttonHotelsAndRestaurants = document.querySelector(".Hotels");
+buttonHotelsAndRestaurants.addEventListener("click", function() {
+    const filteredWorks = works.filter(function(work) {
+        return work.categoryId === 3;
+    })
+    const sectionGallery = document.querySelector(".gallery");
+    sectionGallery.innerHTML = "";
+    generateWorks(filteredWorks);
+});
