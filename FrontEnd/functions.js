@@ -1,20 +1,17 @@
 // Fonction pour la génération des projets
-export async function generateWorks() {
-
-    // Récupération des projets
-    const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
+export async function generateWorks(works) {
 
     // Génération de tous les projets
-    for (let work of works) {
+    for (let i = 0; i < works.length; i++) {
 
         // Construction d'un projet
         const imageWork = document.createElement("img");
         // Supprime l'erreur de l'origine de l'image
         imageWork.setAttribute("crossorigin", "anonymous");
-        imageWork.src = work.imageUrl;
+        imageWork.src = works[i].imageUrl;
         
         const titleWork = document.createElement("figcaption");
-        titleWork.innerText = work.title;
+        titleWork.innerText = works[i].title;
         
         // Rattachement au DOM
         const figureWork = document.createElement("figure");
@@ -26,10 +23,7 @@ export async function generateWorks() {
 };
 
 // Fonction pour la génération des filtres
-export async function generateFilters() {
-
-    // Récupération des différentes catégories
-    const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
+export async function generateFilters(filters) {
 
     // Génération de tous les filtres
 
@@ -42,11 +36,11 @@ export async function generateFilters() {
     sectionFilters.appendChild(buttonAll);
 
     // Boucle pour les autres filtres
-    for (let filter of filters) {
+    for (let i = 0; i < filters.length; i++) {
 
         // Construction d'un filtre
         const filterButton = document.createElement("button");
-        filterButton.innerText = filter.name;
+        filterButton.innerText = filters[i].name;
 
         // Rattachement au DOM
         sectionFilters.appendChild(filterButton);
