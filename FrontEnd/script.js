@@ -13,7 +13,7 @@ generateWorks(works);
 // Paramétrage des boutons filtres
 const sectionGallery = document.querySelector(".gallery");
 
-const filterButtons = document.querySelector("#portfolio").querySelectorAll("button");
+const filterButtons = document.querySelector(".filters").querySelectorAll("button");
 
 for (let i = 0; i < filterButtons.length; i++) {
     filterButtons[i].addEventListener("click", function() {
@@ -26,7 +26,7 @@ for (let i = 0; i < filterButtons.length; i++) {
 
         } else {
         // Sinon filtrer par catégorie
-
+        
             const filteredWorks = works.filter(function(work) {
                 return work.categoryId == filterButtons[i].getAttribute("data-category-id");
                 })
