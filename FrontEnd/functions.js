@@ -1,5 +1,5 @@
 // Fonction pour la génération des projets
-export async function generateWorks(works) {
+export function generateWorks(works) {
 
     // Génération de tous les projets
     for (let i = 0; i < works.length; i++) {
@@ -23,13 +23,13 @@ export async function generateWorks(works) {
 };
 
 // Fonction pour la génération des filtres
-export async function generateFilters(filters) {
+export function generateFilters(filters) {
 
     // Génération de tous les filtres
 
     // Création du bouton "TOUS"
     const buttonAll = document.createElement("button");
-    buttonAll.setAttribute("class", "buttonAll");
+    buttonAll.classList.add("buttonAll");
     buttonAll.innerText = "Tous";
 
     // Rattachement du bouton "Tous" au DOM
@@ -41,7 +41,7 @@ export async function generateFilters(filters) {
 
         // Construction d'un filtre
         const filterButton = document.createElement("button");
-        filterButton.setAttribute("class", `${filters[i].name}`);
+        filterButton.setAttribute("class", filters[i].name);
         filterButton.innerText = filters[i].name;
 
         // Rattachement au DOM

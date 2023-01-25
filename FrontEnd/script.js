@@ -6,15 +6,17 @@ const works = await fetch("http://localhost:5678/api/works").then(works => works
 // Récupération des différentes catégories
 const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
 
-await generateFilters(filters);
-await generateWorks(works);
+generateFilters(filters);
+generateWorks(works);
 
 // Paramétrage des boutons filtres
+
+
+const sectionGallery = document.querySelector(".gallery");
 
 // Bouton Tous
 const buttonAll = document.querySelector(".buttonAll");
 buttonAll.addEventListener("click", function() {
-    const sectionGallery = document.querySelector(".gallery");
     sectionGallery.innerHTML = "";
     generateWorks(works);
 });
@@ -25,7 +27,6 @@ buttonObjects.addEventListener("click", function() {
     const filteredWorks = works.filter(function(work) {
         return work.categoryId === 1;
     })
-    const sectionGallery = document.querySelector(".gallery");
     sectionGallery.innerHTML = "";
     generateWorks(filteredWorks);
 });
@@ -36,7 +37,6 @@ buttonApartments.addEventListener("click", function() {
     const filteredWorks = works.filter(function(work) {
         return work.categoryId === 2;
     })
-    const sectionGallery = document.querySelector(".gallery");
     sectionGallery.innerHTML = "";
     generateWorks(filteredWorks);
 });
@@ -47,7 +47,14 @@ buttonHotelsAndRestaurants.addEventListener("click", function() {
     const filteredWorks = works.filter(function(work) {
         return work.categoryId === 3;
     })
-    const sectionGallery = document.querySelector(".gallery");
     sectionGallery.innerHTML = "";
     generateWorks(filteredWorks);
 });
+
+/*
+Gérer les filtres categories avec des data attributes
+  - voir l'attribut dataset des Element js
+  - voir le selecteur CSS qui permet de cibler par rapport aux attributs d'un élément
+  - voir la negation dans les selecteurs CSS spoiler :not()
+
+*/
