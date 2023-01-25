@@ -41,7 +41,7 @@ export function generateFilters(filters) {
 
         // Construction d'un filtre
         const filterButton = document.createElement("button");
-        filterButton.setAttribute("class", filters[i].name);
+        filterButton.dataset.categoryId = filters[i].id;
         filterButton.innerText = filters[i].name;
 
         // Rattachement au DOM

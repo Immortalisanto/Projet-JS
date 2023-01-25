@@ -6,55 +6,31 @@ const works = await fetch("http://localhost:5678/api/works").then(works => works
 // Récupération des différentes catégories
 const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
 
+// Génération des éléments de la page
 generateFilters(filters);
 generateWorks(works);
 
 // Paramétrage des boutons filtres
-
-
 const sectionGallery = document.querySelector(".gallery");
 
-// Bouton Tous
-const buttonAll = document.querySelector(".buttonAll");
-buttonAll.addEventListener("click", function() {
-    sectionGallery.innerHTML = "";
-    generateWorks(works);
-});
+const filterButtons = document.querySelector("#portfolio").querySelectorAll("button");
 
-// Bouton Objets
-const buttonObjects = document.querySelector(".Objets");
-buttonObjects.addEventListener("click", function() {
-    const filteredWorks = works.filter(function(work) {
-        return work.categoryId === 1;
-    })
-    sectionGallery.innerHTML = "";
-    generateWorks(filteredWorks);
-});
+for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].addEventListener("click", function() {
+        sectionGallery.innerHTML = "";
 
-// Bouton Appartements
-const buttonApartments = document.querySelector(".Appartements");
-buttonApartments.addEventListener("click", function() {
-    const filteredWorks = works.filter(function(work) {
-        return work.categoryId === 2;
-    })
-    sectionGallery.innerHTML = "";
-    generateWorks(filteredWorks);
-});
+        // Vérification s'il s'agit du bouton Tous
+        if (filterButtons[i].classList.contains("buttonAll")) {
 
-// Bouton Hotels & restaurants
-const buttonHotelsAndRestaurants = document.querySelector(".Hotels");
-buttonHotelsAndRestaurants.addEventListener("click", function() {
-    const filteredWorks = works.filter(function(work) {
-        return work.categoryId === 3;
-    })
-    sectionGallery.innerHTML = "";
-    generateWorks(filteredWorks);
-});
+            generateWorks(works);
 
-/*
-Gérer les filtres categories avec des data attributes
-  - voir l'attribut dataset des Element js
-  - voir le selecteur CSS qui permet de cibler par rapport aux attributs d'un élément
-  - voir la negation dans les selecteurs CSS spoiler :not()
+        } else {
+        // Sinon filtrer par catégorie
 
-*/
+            const filteredWorks = works.filter(function(work) {
+                return work.categoryId == filterButtons[i].getAttribute("data-category-id");
+                })
+            generateWorks(filteredWorks);
+        };
+    });
+};
