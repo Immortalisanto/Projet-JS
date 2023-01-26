@@ -275,6 +275,9 @@ header nav a:hover {
 }
 
 #login p {
-	text-decoration: underline;
 	margin-bottom: 275px;
+}
+
+#login a {
+	color: #3D3D3D;
 }
