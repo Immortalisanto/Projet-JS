@@ -274,10 +274,14 @@ header nav a:hover {
 	font-size: 14px;
 }
 
-#login p {
+#login #forgotPassword {
 	margin-bottom: 275px;
 }
 
 #login a {
 	color: #3D3D3D;
+}
+
+#login #error {
+	color: red;
 }
