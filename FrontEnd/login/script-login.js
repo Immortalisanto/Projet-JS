@@ -37,8 +37,20 @@ document.getElementById("connexion").addEventListener("submit", async function(e
         });
 
         let result = await response.json();
-        console.log(result.userId);
-        console.log(result.token);
         
+        if (result.userId == undefined) {
+            error = "Erreur dans l’identifiant ou le mot de passe";
+            document.getElementById("error").innerHTML = error;
+        } else {
+            document.getElementById("error").innerHTML = "";
+            console.log(result.userId);
+            console.log(result.token);
+
+            /* enregistrer le token dans le localStorage */
+
+            alert("Authentification réussie. Cliquez pour valider !");
+
+            document.location.href ="../index.html";
+        }        
     } 
 });
