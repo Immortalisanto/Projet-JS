@@ -48,15 +48,18 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+main, footer, header {
+	max-width: 1140px;
+	margin: auto;
+}
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px auto;
 }
 section {
 	margin: 50px 0
@@ -285,3 +288,54 @@ header nav a:hover {
 #login #error {
 	color: red;
 }
+
+/* Mise en forme du headband */
+
+.headband {
+	color: white;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	height: 59px;
+	align-items: center;
+}
+
+.iconeEditMode {
+	font-size: 15px;
+}
+
+.headband p {
+	font-size: 16px;
+	margin: auto 21px auto 9px;
+}
+
+.headband button {
+	background-color: white;
+	color: black;
+	width: 216px;
+	height: 38px;
+	border-radius: 60px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+/* Mise en forme des boutons "modifier" */
+
+.modifButton {
+	margin-left: 10px;
+	background-color: white;
+	border: 0;
+}
+
+/* Mise en forme dans l'introduction */
+
+#introduction article i, #introduction article button {
+	margin-bottom: 19px;
+}
+
+#introduction figure img {
+	margin-left: 0;
+	margin-bottom: 15px;
+}
+
+/* Mise en forme pour le bouton modifier dans le portfolio */

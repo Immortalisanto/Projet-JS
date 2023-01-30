@@ -46,7 +46,8 @@ document.getElementById("connexion").addEventListener("submit", async function(e
             console.log(result.userId);
             console.log(result.token);
 
-            /* enregistrer le token dans le localStorage */
+            /* enregistrement du token dans le localStorage */
+            window.localStorage.setItem("token", result.token);
 
             alert("Authentification réussie. Cliquez pour valider !");
 

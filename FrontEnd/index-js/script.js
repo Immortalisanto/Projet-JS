@@ -1,4 +1,4 @@
-import { generateWorks, generateFilters } from "./functions.js";
+import { generateWorks, generateFilters, generateAdminRights } from "./functions.js";
 
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
@@ -6,9 +6,30 @@ const works = await fetch("http://localhost:5678/api/works").then(works => works
 // Récupération des différentes catégories
 const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
 
-// Génération des éléments de la page
-generateFilters(filters);
+// Récupération du token si présent
+const adminUser = window.localStorage.getItem("token");
+
+// Génération des projets
 generateWorks(works);
+
+// Modification de la page si adminUser
+if (adminUser) {
+    console.log(adminUser);
+    generateAdminRights();
+} else {
+    generateFilters(filters);
+}
+
+// Si adminUser, ajout d'un événement sur le logout 
+// pour éviter le retour à la page d'authentification
+// Et paramétrage de la déconnexion
+const logoutButton = document.querySelector(".login_link");
+logoutButton.addEventListener("click", function() {
+    if (adminUser) {
+        window.localStorage.removeItem("token");
+        logoutButton.href = "./index.html";
+    }
+})
 
 // Paramétrage des boutons filtres
 const sectionGallery = document.querySelector(".gallery");

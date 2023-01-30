@@ -48,3 +48,87 @@ export function generateFilters(filters) {
         sectionFilters.appendChild(filterButton);
     };
 };
+
+// Fonction pour générer les modifications du l'userAdmin
+export function generateAdminRights() {
+
+    // Modification du login en logout
+    document.querySelector(".login_link").innerHTML = "logout";
+
+    // Création de l'icône
+    const iconeEditMode = document.createElement("i");
+    iconeEditMode.classList.add("fa-solid", "fa-pen-to-square", "iconeEditMode");
+
+    // Ajout du bandeau noir au dessus du header
+    const headband = document.createElement("div");
+    headband.classList.add("headband");
+    const header = document.querySelector("header");
+    document.querySelector("body").insertBefore(headband, header);
+
+        // Ajout du contenu de ce bandeau
+        headband.appendChild(iconeEditMode);
+
+        const editMode = document.createElement("p");
+        editMode.innerText = "Mode édition";
+        headband.appendChild(editMode);
+
+        const publishButton = document.createElement("button");
+        publishButton.innerText = "publier les changements";
+        headband.appendChild(publishButton);
+
+
+    // Ajout des 3 boutons "modifier"
+    
+        // Ajout dans l'introduction
+
+            // Création de l'icône
+            const iconeIntroductionArticle = document.createElement("i");
+            iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "iconeIntroductionArticle");
+        
+            // Création du bouton "modifier"
+            const modifButtonIntroductionArticle = document.createElement("button");
+            modifButtonIntroductionArticle.classList.add("modifButton");
+            modifButtonIntroductionArticle.innerText = "modifier";
+
+            // Rattachement au DOM
+            const introductionArticle = document.querySelector("article");
+            const titleArticle = document.querySelector("article h2");
+            introductionArticle.insertBefore(iconeIntroductionArticle, titleArticle);
+            introductionArticle.insertBefore(modifButtonIntroductionArticle, titleArticle);
+
+        // Ajout dans la figure
+
+            // Création de l'icône
+            const iconeIntroductionFigure = document.createElement("i");
+            iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "iconeIntroductionFigure");
+        
+            // Création du bouton "modifier"
+            const modifButtonIntroductionFigure = document.createElement("button");
+            modifButtonIntroductionFigure.classList.add("modifButton");
+            modifButtonIntroductionFigure.innerText = "modifier";
+
+            // Rattachement au DOM
+            const introductionFigure = document.querySelector("#introduction figure");
+            introductionFigure.appendChild(iconeIntroductionFigure);
+            introductionFigure.appendChild(modifButtonIntroductionFigure);
+
+        // Ajout après le titre du portfolio (works)
+
+            // Création de l'icône
+            const iconeWorks = document.createElement("i");
+            iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "iconeWorks");
+        
+            // Création du bouton "modifier"
+            const modifButtonWorks = document.createElement("button");
+            modifButtonWorks.classList.add("modifButton");
+            modifButtonWorks.innerText = "modifier";
+
+            // Rattachement au DOM
+            const titleAndModifButton = document.querySelector("#title_and_modif_button");
+            titleAndModifButton.appendChild(iconeWorks);
+            titleAndModifButton.appendChild(modifButtonWorks);
+
+
+
+    /* Penser à retirer toutes les alertes et les console.log */
+};
