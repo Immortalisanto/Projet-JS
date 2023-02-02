@@ -209,7 +209,7 @@ footer nav ul {
 	min-width: 100px;
 }
 
-#portfolio .filters button:focus {
+#portfolio .filters .focus_button {
 	color: white;
 	background-color: #1D6154;
 }

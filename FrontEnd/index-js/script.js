@@ -36,9 +36,17 @@ const sectionGallery = document.querySelector(".gallery");
 
 const filterButtons = document.querySelectorAll(".filters button");
 
+
+
 for (let i = 0; i < filterButtons.length; i++) {
     filterButtons[i].addEventListener("click", function() {
         sectionGallery.innerHTML = "";
+
+        for (let j = 0; j < filterButtons.length; j++) {
+            filterButtons[j].classList.remove("focus_button");
+        };
+        
+        filterButtons[i].classList.add("focus_button");
 
         // Vérification s'il s'agit du bouton Tous
         if (filterButtons[i].classList.contains("buttonAll")) {
