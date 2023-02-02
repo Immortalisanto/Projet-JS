@@ -1,4 +1,4 @@
-import { generateWorks, generateFilters, generateAdminRights } from "./functions.js";
+import { generateWorks, generateFilters, generateAdminRights, generateWorksForModal } from "./functions.js";
 
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
@@ -11,6 +11,7 @@ const adminUser = window.localStorage.getItem("token");
 
 // Génération des projets
 generateWorks(works);
+generateWorksForModal(works);
 
 // Modification de la page si adminUser
 if (adminUser) {
@@ -58,3 +59,5 @@ for (let i = 0; i < filterButtons.length; i++) {
         };
     });
 };
+
+// Affichage des projets dans la modale

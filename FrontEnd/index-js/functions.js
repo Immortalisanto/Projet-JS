@@ -86,8 +86,9 @@ export function generateAdminRights() {
             iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
         
             // Création du bouton "modifier"
-            const modifButtonIntroductionArticle = document.createElement("button");
+            const modifButtonIntroductionArticle = document.createElement("a");
             modifButtonIntroductionArticle.classList.add("modifButton");
+            modifButtonIntroductionArticle.href = "#";
             modifButtonIntroductionArticle.innerText = "modifier";
             const titleArticle = document.querySelector("article h2");
             modifButtonIntroductionArticle.appendChild(iconeIntroductionArticle);
@@ -100,8 +101,9 @@ export function generateAdminRights() {
             iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
         
             // Création du bouton "modifier"
-            const modifButtonIntroductionFigure = document.createElement("button");
+            const modifButtonIntroductionFigure = document.createElement("a");
             modifButtonIntroductionFigure.classList.add("modifButton");
+            modifButtonIntroductionFigure.href = "#";
             modifButtonIntroductionFigure.innerText = "modifier";
             modifButtonIntroductionFigure.appendChild(iconeIntroductionFigure);
             document.querySelector("#introduction figure").appendChild(modifButtonIntroductionFigure);
@@ -113,13 +115,35 @@ export function generateAdminRights() {
             iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
         
             // Création du bouton "modifier"
-            const modifButtonWorks = document.createElement("button");
-            modifButtonWorks.classList.add("modifButton");
+            const modifButtonWorks = document.createElement("a");
+            modifButtonWorks.classList.add("modifButton", "worksButtonModif");
+            modifButtonWorks.href = "#";
             modifButtonWorks.innerText = "modifier";
             modifButtonWorks.appendChild(iconeWorks);
             document.querySelector("#title_and_modif_button").appendChild(modifButtonWorks);
+};
 
+// Fonction pour la génération des projets dans la modale
+export function generateWorksForModal(works) {
 
+    // Génération de tous les projets
+    for (let i = 0; i < works.length; i++) {
 
-    /* Penser à retirer toutes les alertes et les console.log */
+        // Construction d'un projet
+        const imageWork = document.createElement("img");
+        // Supprime l'erreur de l'origine de l'image
+        imageWork.setAttribute("crossorigin", "anonymous");
+        imageWork.src = works[i].imageUrl;
+        
+        const editWork = document.createElement("a");
+        editWork.href = "#";
+        editWork.innerText = "éditer";
+        
+        // Rattachement au DOM
+        const figureWork = document.createElement("figure");
+        const worksListToModif = document.getElementById("worksListToModif");
+        figureWork.appendChild(imageWork);
+        figureWork.appendChild(editWork);
+        worksListToModif.appendChild(figureWork);
+    };
 };
