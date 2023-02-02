@@ -16,7 +16,7 @@ document.getElementById("connexion").addEventListener("submit", async function(e
         error = "Veuillez renseigner un mot de passe.";
     } else if (!userEmail) {
         error = "Veuillez renseigner un email.";
-    }
+    };
 
     if (error) {
         document.getElementById("error").innerHTML = error;
@@ -27,31 +27,40 @@ document.getElementById("connexion").addEventListener("submit", async function(e
         };
         console.log(user);
         
-        
-        let response = await fetch("http://localhost:5678/api/users/login", {
+        fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: {
                 "content-Type": "application/json"
             },
             body: JSON.stringify(user)
-        });
+        })
+        .then(response => {
+            // ici on contrôle la réponse
+            if (response.ok) {
+                return response.json();
+            }
 
-        let result = await response.json();
-        
-        if (result.userId == undefined) {
-            error = "Erreur dans l’identifiant ou le mot de passe";
-            document.getElementById("error").innerHTML = error;
-        } else {
+            if (response.status == 401 || response.status == 404) {
+                throw new Error("Erreur dans l’identifiant ou le mot de passe");
+            }
+
+            throw new Error('error message');
+        })
+        .then(result => {
+            
             document.getElementById("error").innerHTML = "";
             console.log(result.userId);
             console.log(result.token);
 
-            /* enregistrement du token dans le localStorage */
+            // enregistrement du token dans le localStorage
             window.localStorage.setItem("token", result.token);
 
             alert("Authentification réussie. Cliquez pour valider !");
 
             document.location.href ="../index.html";
-        }        
-    } 
+        })
+        .catch(error => {
+            document.getElementById("error").innerHTML = error.message;
+        })      
+    };
 });

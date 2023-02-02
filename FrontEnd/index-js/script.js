@@ -34,7 +34,7 @@ logoutButton.addEventListener("click", function() {
 // Paramétrage des boutons filtres
 const sectionGallery = document.querySelector(".gallery");
 
-const filterButtons = document.querySelector(".filters").querySelectorAll("button");
+const filterButtons = document.querySelectorAll(".filters button");
 
 for (let i = 0; i < filterButtons.length; i++) {
     filterButtons[i].addEventListener("click", function() {
@@ -47,10 +47,9 @@ for (let i = 0; i < filterButtons.length; i++) {
 
         } else {
         // Sinon filtrer par catégorie
-        
             const filteredWorks = works.filter(function(work) {
-                return work.categoryId == filterButtons[i].getAttribute("data-category-id");
-                })
+                return work.categoryId == filterButtons[i].dataset.categoryId;
+            });
             generateWorks(filteredWorks);
         };
     });
