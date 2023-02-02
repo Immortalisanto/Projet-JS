@@ -322,9 +322,14 @@ header nav a:hover {
 /* Mise en forme des boutons "modifier" */
 
 .modifButton {
-	margin-left: 10px;
+	display: flex;
+	flex-direction: row-reverse;
 	background-color: white;
 	border: 0;
+}
+
+.modifIcone {
+	margin-right: 11px;
 }
 
 /* Mise en forme dans l'introduction */
@@ -339,3 +344,12 @@ header nav a:hover {
 }
 
 /* Mise en forme pour le bouton modifier dans le portfolio */
+
+#portfolio #title_and_modif_button {
+	display: flex;
+	align-items: center;
+}
+
+#portfolio #title_and_modif_button h2 {
+	margin: 0 31px 0 42%;
+}

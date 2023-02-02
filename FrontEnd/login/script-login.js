@@ -1,12 +1,8 @@
 document.getElementById("connexion").addEventListener("submit", async function(event) {
     event.preventDefault();
-    console.log("preventDefault ok !");
-
     
     let userEmail = document.getElementById("email").value;
-    console.log(userEmail);
     let userPassword = document.getElementById("password").value;
-    console.log(userPassword);
 
     let error;
 
@@ -25,7 +21,6 @@ document.getElementById("connexion").addEventListener("submit", async function(e
             email: userEmail,
             password: userPassword
         };
-        console.log(user);
         
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
@@ -47,16 +42,10 @@ document.getElementById("connexion").addEventListener("submit", async function(e
             throw new Error('error message');
         })
         .then(result => {
-            
-            document.getElementById("error").innerHTML = "";
-            console.log(result.userId);
-            console.log(result.token);
-
             // enregistrement du token dans le localStorage
             window.localStorage.setItem("token", result.token);
 
-            alert("Authentification réussie. Cliquez pour valider !");
-
+            // Redirection vers la page d'accueil
             document.location.href ="../index.html";
         })
         .catch(error => {

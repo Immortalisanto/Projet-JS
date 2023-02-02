@@ -29,7 +29,7 @@ export function generateFilters(filters) {
 
     // Création du bouton "TOUS"
     const buttonAll = document.createElement("button");
-    buttonAll.classList.add("buttonAll");
+    buttonAll.classList.add("buttonAll", "focus_button");
     buttonAll.innerText = "Tous";
 
     // Rattachement du bouton "Tous" au DOM
@@ -83,50 +83,41 @@ export function generateAdminRights() {
 
             // Création de l'icône
             const iconeIntroductionArticle = document.createElement("i");
-            iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "iconeIntroductionArticle");
+            iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
         
             // Création du bouton "modifier"
             const modifButtonIntroductionArticle = document.createElement("button");
             modifButtonIntroductionArticle.classList.add("modifButton");
             modifButtonIntroductionArticle.innerText = "modifier";
-
-            // Rattachement au DOM
-            const introductionArticle = document.querySelector("article");
             const titleArticle = document.querySelector("article h2");
-            introductionArticle.insertBefore(iconeIntroductionArticle, titleArticle);
-            introductionArticle.insertBefore(modifButtonIntroductionArticle, titleArticle);
+            modifButtonIntroductionArticle.appendChild(iconeIntroductionArticle);
+            document.querySelector("article").insertBefore(modifButtonIntroductionArticle, titleArticle);
 
         // Ajout dans la figure
 
             // Création de l'icône
             const iconeIntroductionFigure = document.createElement("i");
-            iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "iconeIntroductionFigure");
+            iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
         
             // Création du bouton "modifier"
             const modifButtonIntroductionFigure = document.createElement("button");
             modifButtonIntroductionFigure.classList.add("modifButton");
             modifButtonIntroductionFigure.innerText = "modifier";
-
-            // Rattachement au DOM
-            const introductionFigure = document.querySelector("#introduction figure");
-            introductionFigure.appendChild(iconeIntroductionFigure);
-            introductionFigure.appendChild(modifButtonIntroductionFigure);
+            modifButtonIntroductionFigure.appendChild(iconeIntroductionFigure);
+            document.querySelector("#introduction figure").appendChild(modifButtonIntroductionFigure);
 
         // Ajout après le titre du portfolio (works)
 
             // Création de l'icône
             const iconeWorks = document.createElement("i");
-            iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "iconeWorks");
+            iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
         
             // Création du bouton "modifier"
             const modifButtonWorks = document.createElement("button");
             modifButtonWorks.classList.add("modifButton");
             modifButtonWorks.innerText = "modifier";
-
-            // Rattachement au DOM
-            const titleAndModifButton = document.querySelector("#title_and_modif_button");
-            titleAndModifButton.appendChild(iconeWorks);
-            titleAndModifButton.appendChild(modifButtonWorks);
+            modifButtonWorks.appendChild(iconeWorks);
+            document.querySelector("#title_and_modif_button").appendChild(modifButtonWorks);
 
 
 
