@@ -54,15 +54,19 @@
 					<!-- Récupération depuis l'API -->
 				</div>
 
-				<div id="modal">
-					<div id="modal_wrapper">
-						<i class="fa-solid fa-xmark cross_icone"></i>
-						<h3>Galerie photo</h3>
-						<div id="worksListToModif">
-							<!-- Récupération depuis l'API -->
+				<div id="modal" style="display: none" aria-hidden="true">
+					<div id="modal_wrapper" class="stopPropagation">
+						<i class="fa-solid fa-xmark cross_icone closeModal"></i>
+						<div id="contentToEdit">
+							<h3>Galerie photo</h3>
+
+							<div id="worksListToModif">
+								<!-- Récupération depuis l'API -->
+							</div>
+
+							<button>Ajouter une photo</button>
+							<a href="#">Supprimer la galerie</a>
 						</div>
-						<button>Ajouter une photo</button>
-						<a href="#">Supprimer la galerie</a>
 					</div>
 				</div>
 			</section>

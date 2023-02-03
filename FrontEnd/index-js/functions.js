@@ -117,7 +117,7 @@ export function generateAdminRights() {
             // Création du bouton "modifier"
             const modifButtonWorks = document.createElement("a");
             modifButtonWorks.classList.add("modifButton", "worksButtonModif");
-            modifButtonWorks.href = "#";
+            modifButtonWorks.href = "#modal";
             modifButtonWorks.innerText = "modifier";
             modifButtonWorks.appendChild(iconeWorks);
             document.querySelector("#title_and_modif_button").appendChild(modifButtonWorks);
@@ -158,4 +158,37 @@ export function generateWorksForModal(works) {
     };
 };
 
-    
+// Fonction pour l'affichage de la modale
+export function generateModal() {
+    let modal = null;
+
+    const openModal = function(e) {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute("href"));
+        target.style.display = null;
+        target.removeAttribute("arya-hidden");
+        target.setAttribute("arya-modal", "true");
+        modal = target;
+        modal.addEventListener("click", closeModal);
+        modal.querySelector(".closeModal").addEventListener("click", closeModal);
+        modal.querySelector(".stopPropagation").addEventListener("click", stopPropagation);
+    };
+
+    const closeModal = function(e) {
+        if (modal === null) return;
+        e.preventDefault();
+        modal.style.display = "none";
+        modal.removeAttribute("arya-modal");
+        modal.setAttribute("arya-hidden", "true");
+        modal.removeEventListener("click", closeModal);
+        modal = null;
+        modal.querySelector(".closeModal").removeEventListener("click", closeModal);
+        modal.querySelector(".stopPropagation").removeEventListener("click", stopPropagation);
+    };
+
+    const stopPropagation = function(e) {
+        e.stopPropagation();
+    }
+
+    document.querySelector(".worksButtonModif").addEventListener("click", openModal);
+};
