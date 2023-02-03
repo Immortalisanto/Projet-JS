@@ -160,30 +160,27 @@ export function generateWorksForModal(works) {
 
 // Fonction pour l'affichage de la modale
 export function generateModal() {
+
+    // Génération page d'accueil de la modale
     let modal = null;
 
     const openModal = function(e) {
-        e.preventDefault();
-        const target = document.querySelector(e.target.getAttribute("href"));
-        target.style.display = null;
-        target.removeAttribute("arya-hidden");
-        target.setAttribute("arya-modal", "true");
-        modal = target;
+        modal = document.querySelector(e.target.getAttribute("href"));
+        modal.style.display = null;
+        modal.removeAttribute("arya-hidden");
+        modal.setAttribute("arya-modal", "true");
         modal.addEventListener("click", closeModal);
         modal.querySelector(".closeModal").addEventListener("click", closeModal);
         modal.querySelector(".stopPropagation").addEventListener("click", stopPropagation);
     };
 
-    const closeModal = function(e) {
+    const closeModal = function() {
         if (modal === null) return;
-        e.preventDefault();
         modal.style.display = "none";
         modal.removeAttribute("arya-modal");
         modal.setAttribute("arya-hidden", "true");
         modal.removeEventListener("click", closeModal);
         modal = null;
-        modal.querySelector(".closeModal").removeEventListener("click", closeModal);
-        modal.querySelector(".stopPropagation").removeEventListener("click", stopPropagation);
     };
 
     const stopPropagation = function(e) {
@@ -191,4 +188,18 @@ export function generateModal() {
     }
 
     document.querySelector(".worksButtonModif").addEventListener("click", openModal);
+
+    // Génération page d'ajout de photo de la modale
+    document.querySelector("#buttonModalAddPhotoPage").addEventListener("click", function() {
+        document.querySelector("#modalHomePage").setAttribute("style", "display: none");
+        document.querySelector("#modalAddPhotoPage").removeAttribute("style");
+        document.querySelector(".arrow-left").removeAttribute("style");
+    });
+
+    // Retour vers la page d'accueil de la modale
+    document.querySelector(".arrow-left").addEventListener("click", function() {
+        document.querySelector("#modalAddPhotoPage").setAttribute("style", "display: none");
+        document.querySelector("#modalHomePage").removeAttribute("style");
+        document.querySelector(".arrow-left").setAttribute("style", "display: none");
+    });
 };

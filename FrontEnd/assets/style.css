@@ -377,7 +377,7 @@ header nav a:hover {
 #modal_wrapper {
 	background-color: white;
 	width: 630px;
-	height: 731px;
+	padding-bottom: 50px;
 	border-radius: 10px;
 }
 
@@ -403,18 +403,23 @@ header nav a:hover {
 	color: white;
 	width: 237px;
 	height: 36px;
-	margin: 38px auto 23px auto;
+	margin: 38px auto 0 auto;
 	font-weight: 700;
 	display: block;
 	border: 0;
 	border-radius: 60px;
+	cursor: pointer;
 }
 
 #modal_wrapper a {
+	text-decoration: none;
+}
+
+#modal_wrapper #removeGallery {
+	margin-top: 23px;
 	color: red;
 	display: block;
 	text-align: center;
-	text-decoration: none;
 }
 
 #worksListToModif img {
@@ -434,10 +439,27 @@ header nav a:hover {
 	width: 40px;
 }
 
+.display_icones {
+	position: relative;
+	padding: 30px;
+}
+
 .cross_icone {
-	margin: 32px 36px 16px 582px;
+	position: absolute;
+	top: 32px;
+	right: 36px;
 	font-size: 16px;
 	cursor: pointer;
+	display: block;
+}
+
+.arrow-left {
+	cursor: pointer;
+	display: block;
+	font-size: 20px;
+	position: absolute;
+	top: 32px;
+	left: 36px;
 }
 
 #worksListToModif .trashcan {
@@ -460,4 +482,90 @@ header nav a:hover {
 	position: absolute;
 	top: 4px;
 	left: 36px;
+}
+
+#addPhotoBox {
+	width: 420px;
+	margin: 36px auto 0 auto;
+	height: 169px;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#addPhotoBox i {
+	font-size: 46px;
+	color: #B9C5CC;
+	margin-top: 28px;
+}
+
+#addPhotoBox label {
+	background-color: #CBD6DC;
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 36px;
+	cursor: pointer;
+	color: #306685;
+	margin-top: 21px;
+}
+
+#addPhotoBox input {
+	display: none;
+}
+
+#addPhotoBox p {
+	font-size: 10px;
+	margin-top: 7px;
+}
+
+#addPhotoForm {
+	width: 420px;
+	margin: 30px auto 0 auto;
+}
+
+#addPhotoForm label {
+	font-weight: 500;
+}
+
+#addPhotoForm input {
+	margin: 10px auto 21px auto;
+	width: 405px;
+	height: 51px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+	border: 0;
+	font-size: 14px;
+	padding-left: 16px;
+	color: #444444;
+}
+
+#addPhotoForm select {
+	margin: 10px auto 21px auto;
+	width: 424px;
+	height: 51px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+	border: 0;
+	padding-left: 16px;
+	color: #444444;
+}
+
+#addPhotoForm option {
+	font-size: 14px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: #444444;
+}
+
+#addPhotoForm #greyBar {
+	border-bottom: 1px solid #B3B3B3;
+	margin: 30px auto;
+	width: 424px;
+}
+
+#addPhotoForm #postForm {
+	background-color: #A7A7A7;
 }
