@@ -134,16 +134,28 @@ export function generateWorksForModal(works) {
         // Supprime l'erreur de l'origine de l'image
         imageWork.setAttribute("crossorigin", "anonymous");
         imageWork.src = works[i].imageUrl;
+
+        const trashcan = document.createElement("i");
+        trashcan.classList.add("fa-regular", "fa-trash-can", "trashcan");
         
         const editWork = document.createElement("a");
         editWork.href = "#";
         editWork.innerText = "éditer";
         
+        const arrow = document.createElement("i");
+        arrow.classList.add("fa-solid", "fa-arrows-up-down-left-right", "arrow");
+        
         // Rattachement au DOM
         const figureWork = document.createElement("figure");
         const worksListToModif = document.getElementById("worksListToModif");
         figureWork.appendChild(imageWork);
+        if (i == 0) {
+            figureWork.appendChild(arrow);
+        }
+        figureWork.appendChild(trashcan);
         figureWork.appendChild(editWork);
         worksListToModif.appendChild(figureWork);
     };
 };
+
+    
