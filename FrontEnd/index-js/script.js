@@ -60,3 +60,45 @@ for (let i = 0; i < filterButtons.length; i++) {
         };
     });
 };
+
+// Paramétrage de l'envoi d'un nouveau projet (modale ajout photo)
+let addPhotoForm = document.getElementById('addPhotoForm');
+addPhotoForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let photoForm = document.getElementById("addPhoto").files[0];
+    let photoTitle = document.getElementById("photoTitle").value;
+    let photoCategory = document.getElementById("categoryPhoto").value;
+    
+    let formData = new FormData(addPhotoForm);
+    formData.append("image", photoForm);
+    formData.append("title", photoTitle);
+    formData.append("category", photoCategory);
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "authorization": `Bearer ${adminUser}`,
+            "accept": "application/json"
+        },
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            alert(`Projet ${photoTitle} envoyé avec succès !`);
+        }
+        if (response.status == 400) {
+            throw new Error("Erreur dans la saisie des informations");
+        }
+        if (response.status == 401) {
+            throw new Error("Envoi des nouvelles informations non autorisé");
+        }
+        if (response.status == 500) {
+            throw new Error("Erreur");
+        }
+        throw new Error("Erreur inconnue");
+    })
+    .catch(error => {
+        addPhotoForm.querySelector(".error").innerHTML = error.message;
+    })
+});
