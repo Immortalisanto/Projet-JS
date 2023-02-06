@@ -78,10 +78,11 @@
 							<h3>Ajout photo</h3>
 
 							<div id="addPhotoBox">
-								<i class="fa-solid fa-image"></i>
-								<label for="addPhoto">+ Ajouter photo</label>
-								<input type="file" id="addPhoto" name="addPhoto" accept="image/png, image/jpeg">
-								<p>jpg, png : 4mo max</p>
+								<i class="fa-solid fa-image iconeRemoveAfterUpload"></i>
+								<label class="labelRemoveAfterUpload" for="addPhoto">+ Ajouter photo</label>
+								<input class="inputRemoveAfterUpload" type="file" id="addPhoto" name="addPhoto" onchange="previewPhoto(this)" accept="image/png, image/jpeg">
+								<p class="paragraphRemoveAfterUpload">jpg, png : 4mo max</p>
+								<img src="#" alt="" id="photoToAdd">
 							</div>
 
 							<form id="addPhotoForm" method="post" action="#">
@@ -98,8 +99,45 @@
 
 								<div id="greyBar"></div>
 								<div class="error"></div>
-								<button id="postForm">Valider</button>
+								<button id="postForm" class="greyButton">Valider</button>
 							</form>
+
+							<script>
+								// Afficher la miniature de la photo après upload
+								let photoToAdd = document.getElementById("photoToAdd");
+
+								let previewPhoto = function (e) {
+
+									// Objet FileList
+									const [photo] = e.files;
+
+									// "photo" est un objet File
+									if (photo) {
+										
+										// Objet FileReader
+										let reader = new FileReader();
+
+										// Se déclenche quand lecture complète
+										reader.onload = function (e) {
+
+											// Modif du src de l'img
+											photoToAdd.src = e.target.result;
+										};
+
+										// Suppression des éléments dans "addPhotoBox" pour n'avoir que l'affichage de la photo
+										let addPhotoBox = document.getElementById("addPhotoBox");
+										
+										addPhotoBox.querySelector(".iconeRemoveAfterUpload").remove();
+										addPhotoBox.querySelector(".labelRemoveAfterUpload").remove();
+										addPhotoBox.querySelector(".inputRemoveAfterUpload").innerHTML = "";
+										addPhotoBox.querySelector(".paragraphRemoveAfterUpload").remove();
+
+										// Lecture du ficher uploadé
+										reader.readAsDataURL(photo);
+									};
+								};
+							</script>
+
 						</div>
 					</div>
 				</div>

@@ -62,6 +62,19 @@ for (let i = 0; i < filterButtons.length; i++) {
 };
 
 // Paramétrage de l'envoi d'un nouveau projet (modale ajout photo)
+
+/* Fonctionne pas !!
+
+let photoFormIsValid = document.getElementById("addPhoto").files[0];
+let photoTitleIsValid = document.getElementById("photoTitle").value;
+let photoCategoryIsValid = document.getElementById("categoryPhoto").value;
+
+if (photoFormIsValid && photoTitleIsValid && photoCategoryIsValid) {
+    document.getElementById("postForm").classList.add("greenButton");
+}; 
+
+*/
+
 let addPhotoForm = document.getElementById('addPhotoForm');
 addPhotoForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -87,18 +100,15 @@ addPhotoForm.addEventListener("submit", function(event) {
         if (response.ok) {
             alert(`Projet ${photoTitle} envoyé avec succès !`);
         }
-        if (response.status == 400) {
-            throw new Error("Erreur dans la saisie des informations");
+        if (response.status == 400 || response.status == 500) {
+            throw new Error("Erreur dans la saisie des informations.");
         }
         if (response.status == 401) {
-            throw new Error("Envoi des nouvelles informations non autorisé");
+            throw new Error("Envoi des nouvelles informations non autorisé.");
         }
-        if (response.status == 500) {
-            throw new Error("Erreur");
-        }
-        throw new Error("Erreur inconnue");
+        throw new Error("Erreur inconnue.");
     })
     .catch(error => {
         addPhotoForm.querySelector(".error").innerHTML = error.message;
-    })
+    });
 });

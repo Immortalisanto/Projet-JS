@@ -398,7 +398,7 @@ header nav a:hover {
 	gap: 6px;
 }
 
-#modal_wrapper button {
+#modal_wrapper #buttonModalAddPhotoPage {
 	background-color: #1D6154;
 	color: white;
 	width: 237px;
@@ -566,6 +566,37 @@ header nav a:hover {
 	width: 424px;
 }
 
-#addPhotoForm #postForm {
+#addPhotoForm .error {
+	color: red;
+	text-align: center;
+}
+
+#addPhotoForm .greyButton {
 	background-color: #A7A7A7;
+	color: white;
+	width: 237px;
+	height: 36px;
+	margin: 38px auto 0 auto;
+	font-weight: 700;
+	display: block;
+	border: 0;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+#addPhotoForm .greenButton {
+	background-color: #1D6154;
+	color: white;
+	width: 237px;
+	height: 36px;
+	margin: 38px auto 0 auto;
+	font-weight: 700;
+	display: block;
+	border: 0;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+#photoToAdd {
+	height: 169px;
 }
