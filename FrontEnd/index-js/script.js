@@ -1,4 +1,12 @@
-import { generateWorks, generateFilters, generateAdminRights, generateModal, generateWorksForModal } from "./functions.js";
+import { 
+    generateWorks, 
+    generateFilters, 
+    generateAdminRights, 
+    generateModal, 
+    generateWorksForModal, 
+    previewPhoto,
+    switchToGreenTheValidateButton
+} from "./functions.js";
 
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
@@ -40,10 +48,10 @@ for (let i = 0; i < filterButtons.length; i++) {
     filterButtons[i].addEventListener("click", function() {
         sectionGallery.innerHTML = "";
 
+        // Permet d'appliquer la couleur verte au filtre sélectionné
         for (let j = 0; j < filterButtons.length; j++) {
             filterButtons[j].classList.remove("focus_button");
         };
-
         filterButtons[i].classList.add("focus_button");
 
         // Vérification s'il s'agit du bouton Tous
@@ -61,20 +69,12 @@ for (let i = 0; i < filterButtons.length; i++) {
     });
 };
 
+// Paramétrage pour le changement de couleur du bouton "valider"
+document.getElementById("addPhoto").addEventListener("change", switchToGreenTheValidateButton);
+document.getElementById("photoTitle").addEventListener("input", switchToGreenTheValidateButton);
+document.getElementById("categoryPhoto").addEventListener("change", switchToGreenTheValidateButton);
+
 // Paramétrage de l'envoi d'un nouveau projet (modale ajout photo)
-
-/* Fonctionne pas !!
-
-let photoFormIsValid = document.getElementById("addPhoto").files[0];
-let photoTitleIsValid = document.getElementById("photoTitle").value;
-let photoCategoryIsValid = document.getElementById("categoryPhoto").value;
-
-if (photoFormIsValid && photoTitleIsValid && photoCategoryIsValid) {
-    document.getElementById("postForm").classList.add("greenButton");
-}; 
-
-*/
-
 let addPhotoForm = document.getElementById('addPhotoForm');
 addPhotoForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -112,3 +112,6 @@ addPhotoForm.addEventListener("submit", function(event) {
         addPhotoForm.querySelector(".error").innerHTML = error.message;
     });
 });
+
+// Faire apparaître la miniature de la photo après l'upload
+document.getElementById('addPhoto').addEventListener('change', previewPhoto);

@@ -203,3 +203,46 @@ export function generateModal() {
         document.querySelector(".arrow-left").setAttribute("style", "display: none");
     });
 };
+
+// Fonction pour afficher la miniature de la photo après upload
+export function previewPhoto(e) {
+    let photoToAdd = document.getElementById("photoToAdd");
+    // Objet FileList
+    const [photo] = e.currentTarget.files;
+
+    // "photo" est un objet File
+    if (photo) {
+        
+        // Objet FileReader
+        let reader = new FileReader();
+
+        // Se déclenche quand lecture complète
+        reader.onload = function (e) {
+
+            // Modif du src de l'img
+            photoToAdd.src = e.target.result;
+        };
+
+        // Suppression des éléments dans "addPhotoBox" pour n'avoir que l'affichage de la photo
+        let addPhotoBox = document.getElementById("addPhotoBox");
+        
+        addPhotoBox.querySelector(".iconeRemoveAfterUpload").remove();
+        addPhotoBox.querySelector(".labelRemoveAfterUpload").remove();
+        addPhotoBox.querySelector(".inputRemoveAfterUpload").innerHTML = "";
+        addPhotoBox.querySelector(".paragraphRemoveAfterUpload").remove();
+
+        // Lecture du ficher uploadé
+        reader.readAsDataURL(photo);
+    };
+};
+
+// Fonction pour modifier la couleur du bouton "valider" du formulaire
+export function switchToGreenTheValidateButton() {
+    let photoForm = document.getElementById("addPhoto").files[0];
+    let photoTitle = document.getElementById("photoTitle").value;
+    let photoCategory = document.getElementById("categoryPhoto").value;
+
+    if (photoForm && photoTitle && photoCategory) {
+        document.getElementById("postForm").classList.replace("greyButton", "greenButton");
+    };
+};
