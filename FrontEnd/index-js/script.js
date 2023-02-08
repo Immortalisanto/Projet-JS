@@ -74,10 +74,22 @@ document.getElementById("addPhoto").addEventListener("change", switchToGreenTheV
 document.getElementById("photoTitle").addEventListener("input", switchToGreenTheValidateButton);
 document.getElementById("categoryPhoto").addEventListener("change", switchToGreenTheValidateButton);
 
+// Checker la taille de l'image
+document.getElementById("addPhoto").addEventListener("change", function(e) {
+    let photoForm = document.getElementById("addPhoto").files[0];
+    const photoFormSize = photoForm.size / 1024 / 1024;
+    if (photoFormSize < 4) {
+        previewPhoto(e);
+        document.getElementById("photoToAdd").dataset.previewPhoto = "OK";
+    } else {
+        addPhotoForm.querySelector(".error").innerHTML = "La taille de l'image est trop volumineuse.";
+    };
+});
+
 // Paramétrage de l'envoi d'un nouveau projet (modale ajout photo)
 let addPhotoForm = document.getElementById('addPhotoForm');
-addPhotoForm.addEventListener("submit", function(event) {
-    event.preventDefault();
+addPhotoForm.addEventListener("submit", function(e) {
+    e.preventDefault();
 
     let photoForm = document.getElementById("addPhoto").files[0];
     let photoTitle = document.getElementById("photoTitle").value;
@@ -88,30 +100,32 @@ addPhotoForm.addEventListener("submit", function(event) {
     formData.append("title", photoTitle);
     formData.append("category", photoCategory);
 
-    fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-            "authorization": `Bearer ${adminUser}`,
-            "accept": "application/json"
-        },
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            alert(`Projet ${photoTitle} envoyé avec succès !`);
-        }
-        if (response.status == 400 || response.status == 500) {
-            throw new Error("Erreur dans la saisie des informations.");
-        }
-        if (response.status == 401) {
-            throw new Error("Envoi des nouvelles informations non autorisé.");
-        }
-        throw new Error("Erreur inconnue.");
-    })
-    .catch(error => {
-        addPhotoForm.querySelector(".error").innerHTML = error.message;
-    });
+    // Vérification si previewPhoto OK
+    if (document.getElementById("photoToAdd").dataset.previewPhoto == "OK") {
+        fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "authorization": `Bearer ${adminUser}`,
+                "accept": "application/json"
+            },
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                alert(`Projet ${photoTitle} envoyé avec succès !`);
+            }
+            if (response.status == 400 || response.status == 500) {
+                throw new Error("Erreur dans la saisie des informations.");
+            }
+            if (response.status == 401) {
+                throw new Error("Envoi des nouvelles informations non autorisé.");
+            }
+            throw new Error("Erreur inconnue.");
+        })
+        .catch(error => {
+            addPhotoForm.querySelector(".error").innerHTML = error.message;
+        });
+    } else {
+        alert("Veuillez sélectionner une photo.");
+    };
 });
-
-// Faire apparaître la miniature de la photo après l'upload
-document.getElementById('addPhoto').addEventListener('change', previewPhoto);
