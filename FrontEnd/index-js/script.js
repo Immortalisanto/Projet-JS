@@ -102,6 +102,7 @@ addPhotoForm.addEventListener("submit", function(e) {
 
     // Vérification si previewPhoto OK
     if (document.getElementById("photoToAdd").dataset.previewPhoto == "OK") {
+        // Envoi du nouveau projet
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
@@ -129,3 +130,30 @@ addPhotoForm.addEventListener("submit", function(e) {
         alert("Veuillez sélectionner une photo.");
     };
 });
+
+// Paramétrage de la suppression d'un projet
+const allTrashcan = document.querySelectorAll(".trashcan");
+for (let trashcan of allTrashcan) {
+    trashcan.addEventListener("click", function() {
+        let id = trashcan.dataset.trashcanId
+        // Suppression du projet
+        fetch("http://localhost:5678/api/works/" + id, {
+            method: "DELETE",
+            headers: {
+                "authorization": `Bearer ${adminUser}`,
+                "accept": "application/json"
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert(`Projet supprimé !`);
+            }
+            if (response.status == 500) {
+                alert("Erreur");
+            }
+            if (response.status == 401) {
+                alert("Suppression non autorisée.");
+            }
+        });
+    });
+};

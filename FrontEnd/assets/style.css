@@ -471,6 +471,7 @@ header nav a:hover {
 	position: absolute;
 	left: 56px;
 	top: 4px;
+	cursor: pointer;
 }
 
 #worksListToModif .arrow {

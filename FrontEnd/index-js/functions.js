@@ -135,8 +135,10 @@ export function generateWorksForModal(works) {
         imageWork.setAttribute("crossorigin", "anonymous");
         imageWork.src = works[i].imageUrl;
 
+        // icône de la poubelle pour suppression du projet
         const trashcan = document.createElement("i");
         trashcan.classList.add("fa-regular", "fa-trash-can", "trashcan");
+        trashcan.dataset.trashcanId = works[i].id;
         
         const editWork = document.createElement("a");
         editWork.href = "#";
