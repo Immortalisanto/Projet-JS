@@ -1,5 +1,5 @@
-document.getElementById("connexion").addEventListener("submit", async function(event) {
-    event.preventDefault();
+document.getElementById("connexion").addEventListener("submit", function(e) {
+    e.preventDefault();
     
     let userEmail = document.getElementById("email").value;
     let userPassword = document.getElementById("password").value;
@@ -30,15 +30,12 @@ document.getElementById("connexion").addEventListener("submit", async function(e
             body: JSON.stringify(user)
         })
         .then(response => {
-            // ici on contrôle la réponse
             if (response.ok) {
                 return response.json();
             }
-
             if (response.status == 401 || response.status == 404) {
                 throw new Error("Erreur dans l’identifiant ou le mot de passe");
             }
-
             throw new Error('error message');
         })
         .then(result => {

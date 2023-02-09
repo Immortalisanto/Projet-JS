@@ -113,7 +113,7 @@ addPhotoForm.addEventListener("submit", function(e) {
         })
         .then(response => {
             if (response.ok) {
-                alert(`Projet ${photoTitle} envoyé avec succès !`);
+                alert(`Projet \"${photoTitle}\" envoyé avec succès !`);
             }
             if (response.status == 400 || response.status == 500) {
                 throw new Error("Erreur dans la saisie des informations.");
@@ -135,8 +135,8 @@ addPhotoForm.addEventListener("submit", function(e) {
 const allTrashcan = document.querySelectorAll(".trashcan");
 for (let trashcan of allTrashcan) {
     trashcan.addEventListener("click", function() {
+
         let id = trashcan.dataset.trashcanId
-        // Suppression du projet
         fetch("http://localhost:5678/api/works/" + id, {
             method: "DELETE",
             headers: {

@@ -25,8 +25,6 @@ export function generateWorks(works) {
 // Fonction pour la génération des filtres
 export function generateFilters(filters) {
 
-    // Génération de tous les filtres
-
     // Création du bouton "TOUS"
     const buttonAll = document.createElement("button");
     buttonAll.classList.add("buttonAll", "focus_button");
@@ -140,10 +138,12 @@ export function generateWorksForModal(works) {
         trashcan.classList.add("fa-regular", "fa-trash-can", "trashcan");
         trashcan.dataset.trashcanId = works[i].id;
         
+        // lien "éditer"
         const editWork = document.createElement("a");
         editWork.href = "#";
         editWork.innerText = "éditer";
         
+        // icône des 4 flèches
         const arrow = document.createElement("i");
         arrow.classList.add("fa-solid", "fa-arrows-up-down-left-right", "arrow");
         
@@ -151,6 +151,7 @@ export function generateWorksForModal(works) {
         const figureWork = document.createElement("figure");
         const worksListToModif = document.getElementById("worksListToModif");
         figureWork.appendChild(imageWork);
+        // Rajoute l'icône des 4 flèches sur le premier projet
         if (i == 0) {
             figureWork.appendChild(arrow);
         }
