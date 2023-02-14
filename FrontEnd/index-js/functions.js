@@ -252,9 +252,9 @@ export function previewPhoto(e) {
         let addPhotoBox = document.getElementById("addPhotoBox");
 
         addPhotoBox.querySelector(".iconeRemoveAfterUpload").remove();
-        addPhotoBox.querySelector(".labelRemoveAfterUpload").remove();
-        addPhotoBox.querySelector(".inputRemoveAfterUpload").innerHTML = "";
-        addPhotoBox.querySelector(".paragraphRemoveAfterUpload").remove();
+        addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.add("displayNone");
+        addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.add("displayNone");
+        addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.add("displayNone");
 
         // Lecture du ficher uploadé
         reader.readAsDataURL(photo);

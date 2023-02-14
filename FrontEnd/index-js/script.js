@@ -154,11 +154,9 @@ for (let trashcan of allTrashcan) {
         .then(response => {
             if (response.ok) {
                 alert(`Projet supprimé !`);
-            }
-            if (response.status == 500) {
+            } else if (response.status == 500) {
                 alert("Erreur");
-            }
-            if (response.status == 401) {
+            } else if (response.status == 401) {
                 alert("Suppression non autorisée.");
             }
         });
