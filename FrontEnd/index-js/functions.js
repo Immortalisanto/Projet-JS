@@ -192,6 +192,7 @@ export function generateModal(filters) {
             addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.remove("displayNone");
             addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
             addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.remove("displayNone");
+            document.getElementById("postForm").classList.replace("greenButton", "greyButton");
         }
 
         modal = document.querySelector(e.target.getAttribute("href"));
@@ -233,7 +234,24 @@ export function generateModal(filters) {
     document.querySelector(".arrow-left").addEventListener("click", function() {
         document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
         document.querySelector("#modalHomePage").classList.toggle("displayNone");
-        document.querySelector(".arrow-left").classList.toggle("hidden");
+        document.querySelector(".arrow-left").classList.toggle("hidden");document.getElementById("addPhotoForm").reset();
+        document.getElementById("addPhoto").value = null;
+
+        // Création de l'icône si celui si n'est pas déjà créé
+        if (!addPhotoBox.querySelector(".iconeRemoveAfterUpload")) {
+            const icone = document.createElement("i");
+            icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
+            document.getElementById("addPhotoBox").insertBefore(icone, document.querySelector(".labelRemoveAfterUpload"));
+        }
+
+        addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.remove("displayNone");
+        addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
+        addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.remove("displayNone");
+
+        // Ne plus afficher la miniature après le retour
+        document.getElementById("photoToAdd").classList.add("displayNone");
+        document.getElementById("photoToAdd").dataset.previewPhoto = "";
+        document.getElementById("postForm").classList.replace("greenButton", "greyButton");
     });
 
     // Ajout des "options" à catégorie dans le formulaire de la modale
