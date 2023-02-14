@@ -1,9 +1,9 @@
-import { 
-    generateWorks, 
-    generateFilters, 
-    generateAdminRights, 
-    generateModal, 
-    generateWorksForModal, 
+import {
+    generateWorks,
+    generateFilters,
+    generateAdminRights,
+    generateModal,
+    generateWorksForModal,
     previewPhoto,
     switchToGreenTheValidateButton
 } from "./functions.js";
@@ -14,6 +14,16 @@ const works = await fetch("http://localhost:5678/api/works").then(works => works
 // Récupération des différentes catégories
 const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
 
+// fetch("http://localhost:5678/api/works")
+// .then(response => {
+//     //test sur la reponse
+// })
+// .then(works => {
+//     //traitement du work
+// })
+// .catch(error => {
+
+// });
 // Récupération du token si présent
 const adminUser = window.localStorage.getItem("token");
 
@@ -24,12 +34,12 @@ generateWorksForModal(works);
 // Modification de la page si adminUser
 if (adminUser) {
     generateAdminRights();
-    generateModal();
+    generateModal(filters);
 } else {
     generateFilters(filters);
 }
 
-// Si adminUser, ajout d'un événement sur le logout 
+// Si adminUser, ajout d'un événement sur le logout
 // pour éviter le retour à la page d'authentification
 // Et paramétrage de la déconnexion
 const logoutButton = document.querySelector(".login_link");
@@ -94,7 +104,7 @@ addPhotoForm.addEventListener("submit", function(e) {
     let photoForm = document.getElementById("addPhoto").files[0];
     let photoTitle = document.getElementById("photoTitle").value;
     let photoCategory = document.getElementById("categoryPhoto").value;
-    
+
     let formData = new FormData(addPhotoForm);
     formData.append("image", photoForm);
     formData.append("title", photoTitle);
@@ -114,14 +124,11 @@ addPhotoForm.addEventListener("submit", function(e) {
         .then(response => {
             if (response.ok) {
                 alert(`Projet \"${photoTitle}\" envoyé avec succès !`);
-            }
-            if (response.status == 400 || response.status == 500) {
+            } else if (response.status == 400 || response.status == 500) {
                 throw new Error("Erreur dans la saisie des informations.");
-            }
-            if (response.status == 401) {
+            } else if (response.status == 401) {
                 throw new Error("Envoi des nouvelles informations non autorisé.");
             }
-            throw new Error("Erreur inconnue.");
         })
         .catch(error => {
             addPhotoForm.querySelector(".error").innerHTML = error.message;

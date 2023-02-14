@@ -363,9 +363,6 @@ header nav a:hover {
 /* Mise en forme de la modale */
 
 #modal {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -375,6 +372,7 @@ header nav a:hover {
 }
 
 #modal_wrapper {
+	margin: 10vh auto;
 	background-color: white;
 	width: 630px;
 	padding-bottom: 50px;
@@ -455,7 +453,6 @@ header nav a:hover {
 
 .arrow-left {
 	cursor: pointer;
-	display: block;
 	font-size: 20px;
 	position: absolute;
 	top: 32px;
@@ -600,4 +597,8 @@ header nav a:hover {
 
 #photoToAdd {
 	height: 169px;
+}
+
+.displayNone {
+	display: none;
 }

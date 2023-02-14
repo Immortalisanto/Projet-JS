@@ -1,4 +1,8 @@
-// Fonction pour la génération des projets
+/**
+ * Generate projects at page load
+ *
+ * @param {Iterable} works objects collection retrieved from GET /api/works
+ */
 export function generateWorks(works) {
 
     // Génération de tous les projets
@@ -9,10 +13,10 @@ export function generateWorks(works) {
         // Supprime l'erreur de l'origine de l'image
         imageWork.setAttribute("crossorigin", "anonymous");
         imageWork.src = works[i].imageUrl;
-        
+
         const titleWork = document.createElement("figcaption");
         titleWork.innerText = works[i].title;
-        
+
         // Rattachement au DOM
         const figureWork = document.createElement("figure");
         const sectionGallery = document.querySelector(".gallery");
@@ -63,62 +67,62 @@ export function generateAdminRights() {
     const header = document.querySelector("header");
     document.querySelector("body").insertBefore(headband, header);
 
-        // Ajout du contenu de ce bandeau
-        headband.appendChild(iconeEditMode);
+    // Ajout du contenu de ce bandeau
+    headband.appendChild(iconeEditMode);
 
-        const editMode = document.createElement("p");
-        editMode.innerText = "Mode édition";
-        headband.appendChild(editMode);
+    const editMode = document.createElement("p");
+    editMode.innerText = "Mode édition";
+    headband.appendChild(editMode);
 
-        const publishButton = document.createElement("button");
-        publishButton.innerText = "publier les changements";
-        headband.appendChild(publishButton);
+    const publishButton = document.createElement("button");
+    publishButton.innerText = "publier les changements";
+    headband.appendChild(publishButton);
 
 
     // Ajout des 3 boutons "modifier"
-    
-        // Ajout dans l'introduction
 
-            // Création de l'icône
-            const iconeIntroductionArticle = document.createElement("i");
-            iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
-        
-            // Création du bouton "modifier"
-            const modifButtonIntroductionArticle = document.createElement("a");
-            modifButtonIntroductionArticle.classList.add("modifButton");
-            modifButtonIntroductionArticle.href = "#";
-            modifButtonIntroductionArticle.innerText = "modifier";
-            const titleArticle = document.querySelector("article h2");
-            modifButtonIntroductionArticle.appendChild(iconeIntroductionArticle);
-            document.querySelector("article").insertBefore(modifButtonIntroductionArticle, titleArticle);
+    // Ajout dans l'introduction
 
-        // Ajout dans la figure
+    // Création de l'icône
+    const iconeIntroductionArticle = document.createElement("i");
+    iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
 
-            // Création de l'icône
-            const iconeIntroductionFigure = document.createElement("i");
-            iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
-        
-            // Création du bouton "modifier"
-            const modifButtonIntroductionFigure = document.createElement("a");
-            modifButtonIntroductionFigure.classList.add("modifButton");
-            modifButtonIntroductionFigure.href = "#";
-            modifButtonIntroductionFigure.innerText = "modifier";
-            modifButtonIntroductionFigure.appendChild(iconeIntroductionFigure);
-            document.querySelector("#introduction figure").appendChild(modifButtonIntroductionFigure);
+    // Création du bouton "modifier"
+    const modifButtonIntroductionArticle = document.createElement("a");
+    modifButtonIntroductionArticle.classList.add("modifButton");
+    modifButtonIntroductionArticle.href = "#";
+    modifButtonIntroductionArticle.innerText = "modifier";
+    const titleArticle = document.querySelector("article h2");
+    modifButtonIntroductionArticle.appendChild(iconeIntroductionArticle);
+    document.querySelector("article").insertBefore(modifButtonIntroductionArticle, titleArticle);
 
-        // Ajout après le titre du portfolio (works)
+    // Ajout dans la figure
 
-            // Création de l'icône
-            const iconeWorks = document.createElement("i");
-            iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
-        
-            // Création du bouton "modifier"
-            const modifButtonWorks = document.createElement("a");
-            modifButtonWorks.classList.add("modifButton", "worksButtonModif");
-            modifButtonWorks.href = "#modal";
-            modifButtonWorks.innerText = "modifier";
-            modifButtonWorks.appendChild(iconeWorks);
-            document.querySelector("#title_and_modif_button").appendChild(modifButtonWorks);
+    // Création de l'icône
+    const iconeIntroductionFigure = document.createElement("i");
+    iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
+
+    // Création du bouton "modifier"
+    const modifButtonIntroductionFigure = document.createElement("a");
+    modifButtonIntroductionFigure.classList.add("modifButton");
+    modifButtonIntroductionFigure.href = "#";
+    modifButtonIntroductionFigure.innerText = "modifier";
+    modifButtonIntroductionFigure.appendChild(iconeIntroductionFigure);
+    document.querySelector("#introduction figure").appendChild(modifButtonIntroductionFigure);
+
+    // Ajout après le titre du portfolio (works)
+
+    // Création de l'icône
+    const iconeWorks = document.createElement("i");
+    iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
+
+    // Création du bouton "modifier"
+    const modifButtonWorks = document.createElement("a");
+    modifButtonWorks.classList.add("modifButton", "worksButtonModif");
+    modifButtonWorks.href = "#modal";
+    modifButtonWorks.innerText = "modifier";
+    modifButtonWorks.appendChild(iconeWorks);
+    document.querySelector("#title_and_modif_button").appendChild(modifButtonWorks);
 };
 
 // Fonction pour la génération des projets dans la modale
@@ -137,16 +141,16 @@ export function generateWorksForModal(works) {
         const trashcan = document.createElement("i");
         trashcan.classList.add("fa-regular", "fa-trash-can", "trashcan");
         trashcan.dataset.trashcanId = works[i].id;
-        
+
         // lien "éditer"
         const editWork = document.createElement("a");
         editWork.href = "#";
         editWork.innerText = "éditer";
-        
+
         // icône des 4 flèches
         const arrow = document.createElement("i");
         arrow.classList.add("fa-solid", "fa-arrows-up-down-left-right", "arrow");
-        
+
         // Rattachement au DOM
         const figureWork = document.createElement("figure");
         const worksListToModif = document.getElementById("worksListToModif");
@@ -155,6 +159,7 @@ export function generateWorksForModal(works) {
         if (i == 0) {
             figureWork.appendChild(arrow);
         }
+
         figureWork.appendChild(trashcan);
         figureWork.appendChild(editWork);
         worksListToModif.appendChild(figureWork);
@@ -162,14 +167,14 @@ export function generateWorksForModal(works) {
 };
 
 // Fonction pour l'affichage de la modale
-export function generateModal() {
+export function generateModal(filters) {
 
     // Génération page d'accueil de la modale
     let modal = null;
 
     const openModal = function(e) {
         modal = document.querySelector(e.target.getAttribute("href"));
-        modal.style.display = null;
+        modal.classList.remove("displayNone");
         modal.removeAttribute("arya-hidden");
         modal.setAttribute("arya-modal", "true");
         modal.addEventListener("click", closeModal);
@@ -179,7 +184,7 @@ export function generateModal() {
 
     const closeModal = function() {
         if (modal === null) return;
-        modal.style.display = "none";
+        modal.classList.add("displayNone");
         modal.removeAttribute("arya-modal");
         modal.setAttribute("arya-hidden", "true");
         modal.removeEventListener("click", closeModal);
@@ -194,17 +199,25 @@ export function generateModal() {
 
     // Génération page d'ajout de photo de la modale
     document.querySelector("#buttonModalAddPhotoPage").addEventListener("click", function() {
-        document.querySelector("#modalHomePage").setAttribute("style", "display: none");
-        document.querySelector("#modalAddPhotoPage").removeAttribute("style");
-        document.querySelector(".arrow-left").removeAttribute("style");
+        document.querySelector("#modalHomePage").classList.toggle("displayNone");
+        document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
+        document.querySelector(".arrow-left").classList.toggle("displayNone");
     });
 
     // Retour vers la page d'accueil de la modale
     document.querySelector(".arrow-left").addEventListener("click", function() {
-        document.querySelector("#modalAddPhotoPage").setAttribute("style", "display: none");
-        document.querySelector("#modalHomePage").removeAttribute("style");
-        document.querySelector(".arrow-left").setAttribute("style", "display: none");
+        document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
+        document.querySelector("#modalHomePage").classList.toggle("displayNone");
+        document.querySelector(".arrow-left").classList.toggle("displayNone");
     });
+
+    // Ajout des "options" à catégorie dans le formulaire de la modale
+    for (let filter of filters) {
+        const category = document.createElement("option");
+        category.innerText = filter.name;
+        category.value = filter.id;
+        document.getElementById("categoryPhoto").appendChild(category);
+    }
 };
 
 // Fonction pour afficher la miniature de la photo après upload
@@ -215,7 +228,7 @@ export function previewPhoto(e) {
 
     // "photo" est un objet File
     if (photo) {
-        
+
         // Objet FileReader
         let reader = new FileReader();
 
@@ -228,7 +241,7 @@ export function previewPhoto(e) {
 
         // Suppression des éléments dans "addPhotoBox" pour n'avoir que l'affichage de la photo
         let addPhotoBox = document.getElementById("addPhotoBox");
-        
+
         addPhotoBox.querySelector(".iconeRemoveAfterUpload").remove();
         addPhotoBox.querySelector(".labelRemoveAfterUpload").remove();
         addPhotoBox.querySelector(".inputRemoveAfterUpload").innerHTML = "";

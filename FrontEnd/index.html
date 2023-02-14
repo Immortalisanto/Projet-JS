@@ -54,13 +54,13 @@
 					<!-- Récupération depuis l'API -->
 				</div>
 
-				<div id="modal" style="display: none" aria-hidden="true">
+				<div id="modal" class="displayNone" aria-hidden="true">
 					<div id="modal_wrapper" class="stopPropagation">
 						<div class="display_icones">
-							<i class="fa-solid fa-arrow-left arrow-left" style="display: none"></i>
+							<i class="fa-solid fa-arrow-left arrow-left displayNone"></i>
 							<i class="fa-solid fa-xmark cross_icone closeModal"></i>
 						</div>
-						
+
 						<!-- Fenêtre d'accueil de la modale -->
 						<div id="modalHomePage">
 							<h3>Galerie photo</h3>
@@ -74,7 +74,7 @@
 						</div>
 
 						<!-- Fenêtre d'ajout de photo de la modale -->
-						<div id="modalAddPhotoPage" style="display: none">
+						<div id="modalAddPhotoPage" class="displayNone">
 							<h3>Ajout photo</h3>
 
 							<div id="addPhotoBox">
@@ -92,9 +92,7 @@
 								<label for="categoryPhoto">Catégorie</label><br>
 								<select name="categoryPhoto" id="categoryPhoto" required>
 									<option value=""></option>
-									<option value="1">Objets</option>
-									<option value="2">Appartements</option>
-									<option value="3">Hotels & restaurants</option>
+									<!-- Autres options récupérées depuis l'API -->
 								</select>
 
 								<div id="greyBar"></div>
