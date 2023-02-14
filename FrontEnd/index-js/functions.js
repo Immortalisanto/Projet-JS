@@ -172,14 +172,28 @@ export function generateModal(filters) {
     // Génération page d'accueil de la modale
     let modal = null;
 
-    console.log(modal);
-
     const openModal = function(e) {
+
+        // Réinitialisation de l'affichage de la modale
         if (modal === null) {
             document.querySelector("#modalHomePage").classList.remove("displayNone");
             document.querySelector("#modalAddPhotoPage").classList.add("displayNone");
             document.querySelector(".arrow-left").classList.add("hidden");
+            document.getElementById("addPhotoForm").reset();
+            document.getElementById("addPhoto").value = null;
+
+            // Création de l'icône si celui si n'est pas déjà créé
+            if (!addPhotoBox.querySelector(".iconeRemoveAfterUpload")) {
+                const icone = document.createElement("i");
+                icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
+                document.getElementById("addPhotoBox").insertBefore(icone, document.querySelector(".labelRemoveAfterUpload"));
+            }
+
+            addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.remove("displayNone");
+            addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
+            addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.remove("displayNone");
         }
+
         modal = document.querySelector(e.target.getAttribute("href"));
         modal.classList.remove("displayNone");
         modal.removeAttribute("arya-hidden");
@@ -187,7 +201,6 @@ export function generateModal(filters) {
         modal.addEventListener("click", closeModal);
         modal.querySelector(".closeModal").addEventListener("click", closeModal);
         modal.querySelector(".stopPropagation").addEventListener("click", stopPropagation);
-        console.log(modal);
     };
 
     const closeModal = function() {
@@ -197,7 +210,10 @@ export function generateModal(filters) {
         modal.setAttribute("arya-hidden", "true");
         modal.removeEventListener("click", closeModal);
         modal = null;
-        console.log(modal);
+
+        // Ne plus afficher la miniature après fermeture
+        document.getElementById("photoToAdd").classList.add("displayNone");
+        document.getElementById("photoToAdd").dataset.previewPhoto = "";
     };
 
     const stopPropagation = function(e) {
@@ -231,6 +247,7 @@ export function generateModal(filters) {
 
 // Fonction pour afficher la miniature de la photo après upload
 export function previewPhoto(e) {
+
     let photoToAdd = document.getElementById("photoToAdd");
     // Objet FileList
     const [photo] = e.currentTarget.files;

@@ -89,6 +89,9 @@ document.getElementById("addPhoto").addEventListener("change", function(e) {
     let photoForm = document.getElementById("addPhoto").files[0];
     const photoFormSize = photoForm.size / 1024 / 1024;
     if (photoFormSize < 4) {
+        // Refaire apparaître l'image si la modale a été préalablement fermée
+        document.getElementById("photoToAdd").classList.remove("displayNone");
+
         previewPhoto(e);
         document.getElementById("photoToAdd").dataset.previewPhoto = "OK";
     } else {
