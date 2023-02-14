@@ -451,6 +451,14 @@ header nav a:hover {
 	display: block;
 }
 
+.hidden {
+	visibility: hidden;
+}
+
+.displayNone {
+	display: none;
+}
+
 .arrow-left {
 	cursor: pointer;
 	font-size: 20px;
@@ -597,8 +605,4 @@ header nav a:hover {
 
 #photoToAdd {
 	height: 169px;
-}
-
-.displayNone {
-	display: none;
 }

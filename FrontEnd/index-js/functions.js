@@ -172,7 +172,14 @@ export function generateModal(filters) {
     // Génération page d'accueil de la modale
     let modal = null;
 
+    console.log(modal);
+
     const openModal = function(e) {
+        if (modal === null) {
+            document.querySelector("#modalHomePage").classList.remove("displayNone");
+            document.querySelector("#modalAddPhotoPage").classList.add("displayNone");
+            document.querySelector(".arrow-left").classList.add("hidden");
+        }
         modal = document.querySelector(e.target.getAttribute("href"));
         modal.classList.remove("displayNone");
         modal.removeAttribute("arya-hidden");
@@ -180,6 +187,7 @@ export function generateModal(filters) {
         modal.addEventListener("click", closeModal);
         modal.querySelector(".closeModal").addEventListener("click", closeModal);
         modal.querySelector(".stopPropagation").addEventListener("click", stopPropagation);
+        console.log(modal);
     };
 
     const closeModal = function() {
@@ -189,6 +197,7 @@ export function generateModal(filters) {
         modal.setAttribute("arya-hidden", "true");
         modal.removeEventListener("click", closeModal);
         modal = null;
+        console.log(modal);
     };
 
     const stopPropagation = function(e) {
@@ -201,14 +210,14 @@ export function generateModal(filters) {
     document.querySelector("#buttonModalAddPhotoPage").addEventListener("click", function() {
         document.querySelector("#modalHomePage").classList.toggle("displayNone");
         document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
-        document.querySelector(".arrow-left").classList.toggle("displayNone");
+        document.querySelector(".arrow-left").classList.toggle("hidden");
     });
 
     // Retour vers la page d'accueil de la modale
     document.querySelector(".arrow-left").addEventListener("click", function() {
         document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
         document.querySelector("#modalHomePage").classList.toggle("displayNone");
-        document.querySelector(".arrow-left").classList.toggle("displayNone");
+        document.querySelector(".arrow-left").classList.toggle("hidden");
     });
 
     // Ajout des "options" à catégorie dans le formulaire de la modale
