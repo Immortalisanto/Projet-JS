@@ -5,19 +5,19 @@
  */
 export function generateWorks(works) {
 
-    // Génération de tous les projets
+    // Generation of all works
     for (let i = 0; i < works.length; i++) {
 
-        // Construction d'un projet
+        // Building a work
         const imageWork = document.createElement("img");
-        // Supprime l'erreur de l'origine de l'image
+        // Remove error from image origin
         imageWork.setAttribute("crossorigin", "anonymous");
         imageWork.src = works[i].imageUrl;
 
         const titleWork = document.createElement("figcaption");
         titleWork.innerText = works[i].title;
 
-        // Rattachement au DOM
+        // Attachment to the DOM
         const figureWork = document.createElement("figure");
         const sectionGallery = document.querySelector(".gallery");
         figureWork.appendChild(imageWork);
@@ -34,24 +34,24 @@ export function generateWorks(works) {
  */
 export function generateFilters(filters) {
 
-    // Création du bouton "TOUS"
+    // Creation of the "TOUS" button
     const buttonAll = document.createElement("button");
     buttonAll.classList.add("buttonAll", "focus_button");
     buttonAll.innerText = "Tous";
 
-    // Rattachement du bouton "Tous" au DOM
+    // Attachment of the button "TOUS" to the DOM
     const sectionFilters = document.querySelector(".filters");
     sectionFilters.appendChild(buttonAll);
 
-    // Boucle pour les autres filtres
+    // Loop for other filters
     for (let i = 0; i < filters.length; i++) {
 
-        // Construction d'un filtre
+        // Building a filter
         const filterButton = document.createElement("button");
         filterButton.dataset.categoryId = filters[i].id;
         filterButton.innerText = filters[i].name;
 
-        // Rattachement au DOM
+        // Attachment to the DOM
         sectionFilters.appendChild(filterButton);
     };
 };
@@ -61,20 +61,20 @@ export function generateFilters(filters) {
  */
 export function generateAdminRights() {
 
-    // Modification du login en logout
+    // Changing the login to logout
     document.querySelector(".login_link").innerHTML = "logout";
 
-    // Création de l'icône
+    // Icon creation
     const iconeEditMode = document.createElement("i");
     iconeEditMode.classList.add("fa-solid", "fa-pen-to-square", "iconeEditMode");
 
-    // Ajout du bandeau noir au dessus du header
+    // Adding of the black banner above the header
     const headband = document.createElement("div");
     headband.classList.add("headband");
     const header = document.querySelector("header");
     document.querySelector("body").insertBefore(headband, header);
 
-    // Ajout du contenu de ce bandeau
+    // Adding the content of this banner
     headband.appendChild(iconeEditMode);
 
     const editMode = document.createElement("p");
@@ -86,15 +86,15 @@ export function generateAdminRights() {
     headband.appendChild(publishButton);
 
 
-    // Ajout des 3 boutons "modifier"
+    // Adding 3 "modifier" buttons
 
-    // Ajout dans l'introduction
+    // Adding in the introduction
 
-    // Création de l'icône
+    // Icon creation
     const iconeIntroductionArticle = document.createElement("i");
     iconeIntroductionArticle.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
 
-    // Création du bouton "modifier"
+    // Creation of the "modifier" button
     const modifButtonIntroductionArticle = document.createElement("a");
     modifButtonIntroductionArticle.classList.add("modifButton");
     modifButtonIntroductionArticle.href = "#";
@@ -103,13 +103,13 @@ export function generateAdminRights() {
     modifButtonIntroductionArticle.appendChild(iconeIntroductionArticle);
     document.querySelector("article").insertBefore(modifButtonIntroductionArticle, titleArticle);
 
-    // Ajout dans la figure
+    // Adding in the figure
 
-    // Création de l'icône
+    // Icone creation
     const iconeIntroductionFigure = document.createElement("i");
     iconeIntroductionFigure.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
 
-    // Création du bouton "modifier"
+    // Creation of the "modifier" button
     const modifButtonIntroductionFigure = document.createElement("a");
     modifButtonIntroductionFigure.classList.add("modifButton");
     modifButtonIntroductionFigure.href = "#";
@@ -117,13 +117,13 @@ export function generateAdminRights() {
     modifButtonIntroductionFigure.appendChild(iconeIntroductionFigure);
     document.querySelector("#introduction figure").appendChild(modifButtonIntroductionFigure);
 
-    // Ajout après le titre du portfolio (works)
+    // Adding after the works title
 
-    // Création de l'icône
+    // Icon creation
     const iconeWorks = document.createElement("i");
     iconeWorks.classList.add("fa-solid", "fa-pen-to-square", "modifIcone");
 
-    // Création du bouton "modifier"
+    // Creation of the "modifier" button
     const modifButtonWorks = document.createElement("a");
     modifButtonWorks.classList.add("modifButton", "worksButtonModif");
     modifButtonWorks.href = "#modal";
@@ -139,34 +139,34 @@ export function generateAdminRights() {
  */
 export function generateWorksForModal(works) {
 
-    // Génération de tous les projets
+    // Generation of all works
     for (let i = 0; i < works.length; i++) {
 
-        // Construction d'un projet
+        // Building a work
         const imageWork = document.createElement("img");
-        // Supprime l'erreur de l'origine de l'image
+        // Remove error from image origin
         imageWork.setAttribute("crossorigin", "anonymous");
         imageWork.src = works[i].imageUrl;
 
-        // icône de la poubelle pour suppression du projet
+        // trash can icon for work deletion
         const trashcan = document.createElement("i");
         trashcan.classList.add("fa-regular", "fa-trash-can", "trashcan");
         trashcan.dataset.trashcanId = works[i].id;
 
-        // lien "éditer"
+        // "éditer" link
         const editWork = document.createElement("a");
         editWork.href = "#";
         editWork.innerText = "éditer";
 
-        // icône des 4 flèches
+        // 4 arrows icon
         const arrow = document.createElement("i");
         arrow.classList.add("fa-solid", "fa-arrows-up-down-left-right", "arrow");
 
-        // Rattachement au DOM
+        // Attachment to the DOM
         const figureWork = document.createElement("figure");
         const worksListToModif = document.getElementById("worksListToModif");
         figureWork.appendChild(imageWork);
-        // Rajoute l'icône des 4 flèches sur le premier projet
+        // Adding the 4 arrows icon to the first work
         if (i == 0) {
             figureWork.appendChild(arrow);
         };
@@ -184,12 +184,12 @@ export function generateWorksForModal(works) {
  */
 export function generateModal(filters) {
 
-    // Génération page d'accueil de la modale
+    // Modal home page generation
     let modal = null;
 
     const openModal = function(e) {
 
-        // Réinitialisation de l'affichage de la modale
+        // Modal display reset
         if (modal === null) {
             document.querySelector("#modalHomePage").classList.remove("displayNone");
             document.querySelector("#modalAddPhotoPage").classList.add("displayNone");
@@ -197,7 +197,7 @@ export function generateModal(filters) {
             document.getElementById("addPhotoForm").reset();
             document.getElementById("addPhoto").value = null;
 
-            // Création de l'icône si celui si n'est pas déjà créé
+            // Creation of the icon if the one is not already created
             if (!addPhotoBox.querySelector(".iconeRemoveAfterUpload")) {
                 const icone = document.createElement("i");
                 icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
@@ -227,7 +227,7 @@ export function generateModal(filters) {
         modal.removeEventListener("click", closeModal);
         modal = null;
 
-        // Ne plus afficher la miniature après fermeture
+        // Do not show thumbnail after closing
         document.getElementById("photoToAdd").classList.add("displayNone");
         document.getElementById("photoToAdd").dataset.previewPhoto = "";
     };
@@ -238,21 +238,21 @@ export function generateModal(filters) {
 
     document.querySelector(".worksButtonModif").addEventListener("click", openModal);
 
-    // Génération page d'ajout de photo de la modale
+    // Generation of the photo addition page of the modal
     document.querySelector("#buttonModalAddPhotoPage").addEventListener("click", function() {
         document.querySelector("#modalHomePage").classList.toggle("displayNone");
         document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
         document.querySelector(".arrow-left").classList.toggle("hidden");
     });
 
-    // Retour vers la page d'accueil de la modale
+    // Back to the modal homepage
     document.querySelector(".arrow-left").addEventListener("click", function() {
         document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
         document.querySelector("#modalHomePage").classList.toggle("displayNone");
         document.querySelector(".arrow-left").classList.toggle("hidden");document.getElementById("addPhotoForm").reset();
         document.getElementById("addPhoto").value = null;
 
-        // Création de l'icône si celui si n'est pas déjà créé
+        // Creation of the icon if the one is not already created
         if (!addPhotoBox.querySelector(".iconeRemoveAfterUpload")) {
             const icone = document.createElement("i");
             icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
@@ -263,13 +263,13 @@ export function generateModal(filters) {
         addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
         addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.remove("displayNone");
 
-        // Ne plus afficher la miniature après le retour
+        // Don't show thumbnail after return
         document.getElementById("photoToAdd").classList.add("displayNone");
         document.getElementById("photoToAdd").dataset.previewPhoto = "";
         document.getElementById("postForm").classList.replace("greenButton", "greyButton");
     });
 
-    // Ajout des "options" à catégorie dans le formulaire de la modale
+    // Added "options" to category in modal form
     for (let filter of filters) {
         const category = document.createElement("option");
         category.innerText = filter.name;
@@ -286,23 +286,23 @@ export function generateModal(filters) {
 export function previewPhoto(e) {
 
     let photoToAdd = document.getElementById("photoToAdd");
-    // Objet FileList
+    // FileList object
     const [photo] = e.currentTarget.files;
 
-    // "photo" est un objet File
+    // "photo" is a File object
     if (photo) {
 
-        // Objet FileReader
+        // FileReader object
         let reader = new FileReader();
 
-        // Se déclenche quand lecture complète
+        // Triggers when full read
         reader.onload = function (e) {
 
-            // Modif du src de l'img
+            // Modify the src of the img
             photoToAdd.src = e.target.result;
         };
 
-        // Suppression des éléments dans "addPhotoBox" pour n'avoir que l'affichage de la photo
+        // Deletion of elements in "addPhotoBox" to have only the display of the photo
         let addPhotoBox = document.getElementById("addPhotoBox");
 
         addPhotoBox.querySelector(".iconeRemoveAfterUpload").remove();
@@ -310,7 +310,7 @@ export function previewPhoto(e) {
         addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.add("displayNone");
         addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.add("displayNone");
 
-        // Lecture du ficher uploadé
+        // Reading the uploaded file
         reader.readAsDataURL(photo);
     };
 };
