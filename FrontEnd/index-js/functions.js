@@ -26,7 +26,12 @@ export function generateWorks(works) {
     };
 };
 
-// Fonction pour la génération des filtres
+/**
+ * Generate filters at page load
+ *
+ * @type {buttonAll} create the button all
+ * @param {Iterable} filters objects collection retrieved from GET /api/categories
+ */
 export function generateFilters(filters) {
 
     // Création du bouton "TOUS"
@@ -51,7 +56,9 @@ export function generateFilters(filters) {
     };
 };
 
-// Fonction pour générer les modifications du l'userAdmin
+/**
+ * Generate modifications at home page for the admin user
+ */
 export function generateAdminRights() {
 
     // Modification du login en logout
@@ -125,7 +132,11 @@ export function generateAdminRights() {
     document.querySelector("#title_and_modif_button").appendChild(modifButtonWorks);
 };
 
-// Fonction pour la génération des projets dans la modale
+/**
+ * Generate works for the modal page
+ *
+ * @param {Iterable} works objects collection retrieved from GET /api/works
+ */
 export function generateWorksForModal(works) {
 
     // Génération de tous les projets
@@ -166,7 +177,11 @@ export function generateWorksForModal(works) {
     };
 };
 
-// Fonction pour l'affichage de la modale
+/**
+ * Generate the modal page
+ *
+ * @param {Iterable} filters objects collection retrieved from GET /api/categories
+ */
 export function generateModal(filters) {
 
     // Génération page d'accueil de la modale
@@ -263,7 +278,11 @@ export function generateModal(filters) {
     };
 };
 
-// Fonction pour afficher la miniature de la photo après upload
+/**
+ * Generate a thumbnail after loading the photo
+ *
+ * @param {*} e
+ */
 export function previewPhoto(e) {
 
     let photoToAdd = document.getElementById("photoToAdd");
@@ -296,7 +315,9 @@ export function previewPhoto(e) {
     };
 };
 
-// Fonction pour modifier la couleur du bouton "valider" du formulaire
+/**
+ * Switch to green the validate button after form is complete
+ */
 export function switchToGreenTheValidateButton() {
     let photoForm = document.getElementById("addPhoto").files[0];
     let photoTitle = document.getElementById("photoTitle").value;
