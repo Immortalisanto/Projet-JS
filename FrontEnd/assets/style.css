@@ -214,7 +214,7 @@ footer nav ul {
 	background-color: #1D6154;
 }
 
-/* Mise en forme du header */
+/* Header formatting */
 
 header nav a, header nav a:visited {
 	text-decoration: none;
@@ -229,7 +229,7 @@ header nav a:hover {
 	color: #B1663C;
 }
 
-/* Mise en forme du Log In */
+/* Log In formatting */
 
 #login {
 	width: 40%;
@@ -289,7 +289,7 @@ header nav a:hover {
 	color: red;
 }
 
-/* Mise en forme du headband */
+/* Headband formatting */
 
 .headband {
 	color: white;
@@ -319,7 +319,7 @@ header nav a:hover {
 	font-weight: 600;
 }
 
-/* Mise en forme des boutons "modifier" */
+/* "modifier" buttons formatting */
 
 .modifButton {
 	display: flex;
@@ -338,7 +338,7 @@ header nav a:hover {
 	margin-right: 11px;
 }
 
-/* Mise en forme dans l'introduction */
+/* Formatting in the introduction */
 
 #introduction article a {
 	margin-bottom: 19px;
@@ -349,7 +349,7 @@ header nav a:hover {
 	margin-bottom: 15px;
 }
 
-/* Mise en forme pour le bouton modifier dans le portfolio */
+/* Formatting of the "modifier" button in the works section */
 
 #portfolio #title_and_modif_button {
 	display: flex;
@@ -360,7 +360,7 @@ header nav a:hover {
 	margin: 0 31px 0 42%;
 }
 
-/* Mise en forme de la modale */
+/* Modal formatting */
 
 #modal {
 	position: fixed;
