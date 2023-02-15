@@ -158,7 +158,7 @@ export function generateWorksForModal(works) {
         // Rajoute l'icône des 4 flèches sur le premier projet
         if (i == 0) {
             figureWork.appendChild(arrow);
-        }
+        };
 
         figureWork.appendChild(trashcan);
         figureWork.appendChild(editWork);
@@ -187,13 +187,13 @@ export function generateModal(filters) {
                 const icone = document.createElement("i");
                 icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
                 document.getElementById("addPhotoBox").insertBefore(icone, document.querySelector(".labelRemoveAfterUpload"));
-            }
+            };
 
             addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.remove("displayNone");
             addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
             addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.remove("displayNone");
             document.getElementById("postForm").classList.replace("greenButton", "greyButton");
-        }
+        };
 
         modal = document.querySelector(e.target.getAttribute("href"));
         modal.classList.remove("displayNone");
@@ -219,7 +219,7 @@ export function generateModal(filters) {
 
     const stopPropagation = function(e) {
         e.stopPropagation();
-    }
+    };
 
     document.querySelector(".worksButtonModif").addEventListener("click", openModal);
 
@@ -242,7 +242,7 @@ export function generateModal(filters) {
             const icone = document.createElement("i");
             icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
             document.getElementById("addPhotoBox").insertBefore(icone, document.querySelector(".labelRemoveAfterUpload"));
-        }
+        };
 
         addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.remove("displayNone");
         addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
@@ -260,7 +260,7 @@ export function generateModal(filters) {
         category.innerText = filter.name;
         category.value = filter.id;
         document.getElementById("categoryPhoto").appendChild(category);
-    }
+    };
 };
 
 // Fonction pour afficher la miniature de la photo après upload

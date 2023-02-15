@@ -8,36 +8,100 @@ import {
     switchToGreenTheValidateButton
 } from "./functions.js";
 
-// Récupération des projets
-const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
-
-// Récupération des différentes catégories
-const filters = await fetch("http://localhost:5678/api/categories").then(filters => filters.json());
-
-// fetch("http://localhost:5678/api/works")
-// .then(response => {
-//     //test sur la reponse
-// })
-// .then(works => {
-//     //traitement du work
-// })
-// .catch(error => {
-
-// });
 // Récupération du token si présent
 const adminUser = window.localStorage.getItem("token");
 
-// Génération des projets
-generateWorks(works);
-generateWorksForModal(works);
+fetch("http://localhost:5678/api/categories")
+.then(response => {
+    // Test sur la réponse
+    if (response.ok) {
+        return response.json();
+    }
+})
+.then(filters => {
+    // Modification de la page si adminUser
+    if (adminUser) {
+        generateAdminRights();
+        generateModal(filters);
+    } else {
+        // Génération des filtres
+        generateFilters(filters);
+    }
+})
+.catch (error => {
+    alert("Impossible de charger les filtres. Veuillez rafraichir la page ou réessayer ultérieurement.");
+});
 
-// Modification de la page si adminUser
-if (adminUser) {
-    generateAdminRights();
-    generateModal(filters);
-} else {
-    generateFilters(filters);
-}
+fetch("http://localhost:5678/api/works")
+.then(response => {
+
+    // Test sur la réponse
+    if (response.ok) {
+        return response.json();
+    };
+})
+.then(works => {
+    // Génération des projets
+    generateWorks(works);
+    generateWorksForModal(works);
+
+    // Paramétrage de la suppression d'un projet
+    const allTrashcan = document.querySelectorAll(".trashcan");
+    for (let trashcan of allTrashcan) {
+        trashcan.addEventListener("click", function() {
+
+            let id = trashcan.dataset.trashcanId
+            fetch("http://localhost:5678/api/works/" + id, {
+                method: "DELETE",
+                headers: {
+                    "authorization": `Bearer ${adminUser}`,
+                    "accept": "application/json"
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert(`Projet supprimé !`);
+                } else if (response.status == 500) {
+                    alert("Erreur");
+                } else if (response.status == 401) {
+                    alert("Suppression non autorisée.");
+                }
+            });
+        });
+    };
+
+    // Paramétrage des boutons filtres
+    const sectionGallery = document.querySelector(".gallery");
+    const filterButtons = document.querySelectorAll(".filters button");
+
+    for (let i = 0; i < filterButtons.length; i++) {
+        filterButtons[i].addEventListener("click", function() {
+            sectionGallery.innerHTML = "";
+
+            // Permet d'appliquer la couleur verte au filtre sélectionné
+            for (let j = 0; j < filterButtons.length; j++) {
+                filterButtons[j].classList.remove("focus_button");
+            };
+            filterButtons[i].classList.add("focus_button");
+
+            // Vérification s'il s'agit du bouton Tous
+            if (filterButtons[i].classList.contains("buttonAll")) {
+
+                generateWorks(works);
+
+            } else {
+            // Sinon filtrer par catégorie
+                const filteredWorks = works.filter(function(work) {
+                    return work.categoryId == filterButtons[i].dataset.categoryId;
+                });
+                generateWorks(filteredWorks);
+            };
+        });
+    };
+})
+.catch(error => {
+    alert("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
+});
 
 // Si adminUser, ajout d'un événement sur le logout
 // pour éviter le retour à la page d'authentification
@@ -47,37 +111,8 @@ logoutButton.addEventListener("click", function() {
     if (adminUser) {
         window.localStorage.removeItem("token");
         logoutButton.href = "./index.html";
-    }
-})
-
-// Paramétrage des boutons filtres
-const sectionGallery = document.querySelector(".gallery");
-const filterButtons = document.querySelectorAll(".filters button");
-
-for (let i = 0; i < filterButtons.length; i++) {
-    filterButtons[i].addEventListener("click", function() {
-        sectionGallery.innerHTML = "";
-
-        // Permet d'appliquer la couleur verte au filtre sélectionné
-        for (let j = 0; j < filterButtons.length; j++) {
-            filterButtons[j].classList.remove("focus_button");
-        };
-        filterButtons[i].classList.add("focus_button");
-
-        // Vérification s'il s'agit du bouton Tous
-        if (filterButtons[i].classList.contains("buttonAll")) {
-
-            generateWorks(works);
-
-        } else {
-        // Sinon filtrer par catégorie
-            const filteredWorks = works.filter(function(work) {
-                return work.categoryId == filterButtons[i].dataset.categoryId;
-            });
-            generateWorks(filteredWorks);
-        };
-    });
-};
+    };
+});
 
 // Paramétrage pour le changement de couleur du bouton "valider"
 document.getElementById("addPhoto").addEventListener("change", switchToGreenTheValidateButton);
@@ -136,32 +171,9 @@ addPhotoForm.addEventListener("submit", function(e) {
         .catch(error => {
             addPhotoForm.querySelector(".error").innerHTML = error.message;
         });
+
     } else {
+
         alert("Veuillez sélectionner une photo.");
     };
 });
-
-// Paramétrage de la suppression d'un projet
-const allTrashcan = document.querySelectorAll(".trashcan");
-for (let trashcan of allTrashcan) {
-    trashcan.addEventListener("click", function() {
-
-        let id = trashcan.dataset.trashcanId
-        fetch("http://localhost:5678/api/works/" + id, {
-            method: "DELETE",
-            headers: {
-                "authorization": `Bearer ${adminUser}`,
-                "accept": "application/json"
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                alert(`Projet supprimé !`);
-            } else if (response.status == 500) {
-                alert("Erreur");
-            } else if (response.status == 401) {
-                alert("Suppression non autorisée.");
-            }
-        });
-    });
-};
