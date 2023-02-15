@@ -8,23 +8,22 @@ import {
     switchToGreenTheValidateButton
 } from "./functions.js";
 
-// Récupération du token si présent
+// Recovery of the token if present
 const adminUser = window.localStorage.getItem("token");
 
 fetch("http://localhost:5678/api/categories")
 .then(response => {
-    // Test sur la réponse
     if (response.ok) {
         return response.json();
     }
 })
 .then(filters => {
-    // Modification de la page si adminUser
+    // Modification of the page if adminUser
     if (adminUser) {
         generateAdminRights();
         generateModal(filters);
     } else {
-        // Génération des filtres
+        // Filters generation
         generateFilters(filters);
     }
 })
@@ -34,18 +33,16 @@ fetch("http://localhost:5678/api/categories")
 
 fetch("http://localhost:5678/api/works")
 .then(response => {
-
-    // Test sur la réponse
     if (response.ok) {
         return response.json();
     };
 })
 .then(works => {
-    // Génération des projets
+    // Works generation
     generateWorks(works);
     generateWorksForModal(works);
 
-    // Paramétrage de la suppression d'un projet
+    // Setting up the deletion of a project
     const allTrashcan = document.querySelectorAll(".trashcan");
     for (let trashcan of allTrashcan) {
         trashcan.addEventListener("click", function() {
@@ -70,7 +67,7 @@ fetch("http://localhost:5678/api/works")
         });
     };
 
-    // Paramétrage des boutons filtres
+    // Setting up the filters buttons
     const sectionGallery = document.querySelector(".gallery");
     const filterButtons = document.querySelectorAll(".filters button");
 
@@ -78,19 +75,19 @@ fetch("http://localhost:5678/api/works")
         filterButtons[i].addEventListener("click", function() {
             sectionGallery.innerHTML = "";
 
-            // Permet d'appliquer la couleur verte au filtre sélectionné
+            // Applies the green color to the selected filter
             for (let j = 0; j < filterButtons.length; j++) {
                 filterButtons[j].classList.remove("focus_button");
             };
             filterButtons[i].classList.add("focus_button");
 
-            // Vérification s'il s'agit du bouton Tous
+            // Checking if it is the "Tous" button
             if (filterButtons[i].classList.contains("buttonAll")) {
 
                 generateWorks(works);
 
             } else {
-            // Sinon filtrer par catégorie
+            // Otherwise filter by category
                 const filteredWorks = works.filter(function(work) {
                     return work.categoryId == filterButtons[i].dataset.categoryId;
                 });
@@ -103,9 +100,9 @@ fetch("http://localhost:5678/api/works")
     alert("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
 });
 
-// Si adminUser, ajout d'un événement sur le logout
-// pour éviter le retour à la page d'authentification
-// Et paramétrage de la déconnexion
+// If adminUser, adding an event on the logout
+// to avoid returning to the authentication page
+// and configuring the logout
 const logoutButton = document.querySelector(".login_link");
 logoutButton.addEventListener("click", function() {
     if (adminUser) {
@@ -114,17 +111,17 @@ logoutButton.addEventListener("click", function() {
     };
 });
 
-// Paramétrage pour le changement de couleur du bouton "valider"
+// Settings for changing the color of the "valider" button
 document.getElementById("addPhoto").addEventListener("change", switchToGreenTheValidateButton);
 document.getElementById("photoTitle").addEventListener("input", switchToGreenTheValidateButton);
 document.getElementById("categoryPhoto").addEventListener("change", switchToGreenTheValidateButton);
 
-// Checker la taille de l'image
+// Check image size
 document.getElementById("addPhoto").addEventListener("change", function(e) {
     let photoForm = document.getElementById("addPhoto").files[0];
     const photoFormSize = photoForm.size / 1024 / 1024;
     if (photoFormSize < 4) {
-        // Refaire apparaître l'image si la modale a été préalablement fermée
+        // Redisplay the image if the modal was previously closed
         document.getElementById("photoToAdd").classList.remove("displayNone");
 
         previewPhoto(e);
@@ -134,7 +131,7 @@ document.getElementById("addPhoto").addEventListener("change", function(e) {
     };
 });
 
-// Paramétrage de l'envoi d'un nouveau projet (modale ajout photo)
+// Settings for sending a new project (add photo modal)
 let addPhotoForm = document.getElementById('addPhotoForm');
 addPhotoForm.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -148,9 +145,9 @@ addPhotoForm.addEventListener("submit", function(e) {
     formData.append("title", photoTitle);
     formData.append("category", photoCategory);
 
-    // Vérification si previewPhoto OK
+    // Check if previewPhoto OK
     if (document.getElementById("photoToAdd").dataset.previewPhoto == "OK") {
-        // Envoi du nouveau projet
+        // Submit new project
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
