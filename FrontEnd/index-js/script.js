@@ -15,6 +15,8 @@ fetch("http://localhost:5678/api/categories")
 .then(response => {
     if (response.ok) {
         return response.json();
+    } else {
+        throw Error("Impossible de charger les filtres. Veuillez réessayer ultérieurement.");
     }
 })
 .then(filters => {
@@ -28,13 +30,15 @@ fetch("http://localhost:5678/api/categories")
     }
 })
 .catch (error => {
-    alert("Impossible de charger les filtres. Veuillez rafraichir la page ou réessayer ultérieurement.");
+    alert(error.message);
 });
 
 fetch("http://localhost:5678/api/works")
 .then(response => {
     if (response.ok) {
         return response.json();
+    } else {
+        throw Error("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
     };
 })
 .then(works => {
@@ -97,7 +101,7 @@ fetch("http://localhost:5678/api/works")
     };
 })
 .catch(error => {
-    alert("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
+    alert(error.message);
 });
 
 // If adminUser, adding an event on the logout
