@@ -2,6 +2,7 @@
  * Generate projects at page load
  *
  * @param {Iterable} works objects collection retrieved from GET /api/works
+ * @returns {void}
  */
 export function generateWorks(works) {
 
@@ -29,11 +30,10 @@ export function generateWorks(works) {
 /**
  * Generate filters at page load
  *
- * @type {buttonAll} create the button all
  * @param {Iterable} filters objects collection retrieved from GET /api/categories
+ * @returns {void}
  */
 export function generateFilters(filters) {
-
     // Creation of the "TOUS" button
     const buttonAll = document.createElement("button");
     buttonAll.classList.add("buttonAll", "focus_button");
@@ -136,6 +136,7 @@ export function generateAdminRights() {
  * Generate works for the modal page
  *
  * @param {Iterable} works objects collection retrieved from GET /api/works
+ * @returns {void}
  */
 export function generateWorksForModal(works) {
 
@@ -181,6 +182,7 @@ export function generateWorksForModal(works) {
  * Generate the modal page
  *
  * @param {Iterable} filters objects collection retrieved from GET /api/categories
+ * @returns {void}
  */
 export function generateModal(filters) {
 
@@ -249,7 +251,8 @@ export function generateModal(filters) {
     document.querySelector(".arrow-left").addEventListener("click", function() {
         document.querySelector("#modalAddPhotoPage").classList.toggle("displayNone");
         document.querySelector("#modalHomePage").classList.toggle("displayNone");
-        document.querySelector(".arrow-left").classList.toggle("hidden");document.getElementById("addPhotoForm").reset();
+        document.querySelector(".arrow-left").classList.toggle("hidden");
+        document.getElementById("addPhotoForm").reset();
         document.getElementById("addPhoto").value = null;
 
         // Creation of the icon if the one is not already created
@@ -281,13 +284,13 @@ export function generateModal(filters) {
 /**
  * Generate a thumbnail after loading the photo
  *
- * @param {*} e
+ * @param {Event} e
  */
 export function previewPhoto(e) {
 
     let photoToAdd = document.getElementById("photoToAdd");
     // FileList object
-    const [photo] = e.currentTarget.files;
+    const photo = e.currentTarget.files;
 
     // "photo" is a File object
     if (photo) {
