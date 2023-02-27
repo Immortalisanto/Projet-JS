@@ -290,7 +290,7 @@ export function previewPhoto(e) {
 
     let photoToAdd = document.getElementById("photoToAdd");
     // FileList object
-    const photo = e.currentTarget.files;
+    const [photo] = e.currentTarget.files;
 
     // "photo" is a File object
     if (photo) {
