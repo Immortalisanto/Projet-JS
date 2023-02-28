@@ -7,7 +7,7 @@ document.getElementById("connexion").addEventListener("submit", function(e) {
     let error;
 
     if (!userEmail && !userPassword) {
-        error = "Veuillez renseigner tous les champs."
+        error = "Veuillez renseigner tous les champs.";
     } else if (!userPassword) {
         error = "Veuillez renseigner un mot de passe.";
     } else if (!userEmail) {

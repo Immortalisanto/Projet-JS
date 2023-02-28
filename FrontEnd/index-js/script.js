@@ -49,14 +49,14 @@ fetch("http://localhost:5678/api/works")
     // Setting up the deletion of a project
     const allTrashcan = document.querySelectorAll(".trashcan");
     for (let trashcan of allTrashcan) {
-        trashcan.addEventListener("click", function() {
+        trashcan.addEventListener("click", function(e) {
+            e.preventDefault();
 
-            let id = trashcan.dataset.trashcanId
+            let id = trashcan.dataset.trashcanId;
             fetch("http://localhost:5678/api/works/" + id, {
                 method: "DELETE",
                 headers: {
-                    "authorization": `Bearer ${adminUser}`,
-                    "accept": "application/json"
+                    "authorization": `Bearer ${adminUser}`
                 }
             })
             .then(response => {
