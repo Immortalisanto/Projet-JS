@@ -5,7 +5,8 @@ import {
     generateModal,
     generateWorksForModal,
     previewPhoto,
-    switchToGreenTheValidateButton
+    switchToGreenTheValidateButton,
+    closeModal
 } from "./functions.js";
 
 // Recovery of the token if present
@@ -62,6 +63,7 @@ fetch("http://localhost:5678/api/works")
             .then(response => {
                 if (response.ok) {
                     alert(`Projet supprimé !`);
+                    closeModal();
                 } else if (response.status == 500) {
                     alert("Erreur");
                 } else if (response.status == 401) {
@@ -163,6 +165,25 @@ addPhotoForm.addEventListener("submit", function(e) {
         .then(response => {
             if (response.ok) {
                 alert(`Projet \"${photoTitle}\" envoyé avec succès !`);
+                closeModal();
+                document.querySelector("#modalHomePage").classList.remove("displayNone");
+                document.querySelector("#modalAddPhotoPage").classList.add("displayNone");
+                document.querySelector(".arrow-left").classList.add("hidden");
+                document.getElementById("addPhotoForm").reset();
+                document.getElementById("addPhoto").value = null;
+
+                // Creation of the icon if the one is not already created
+                if (!addPhotoBox.querySelector(".iconeRemoveAfterUpload")) {
+                    const icone = document.createElement("i");
+                    icone.classList.add("fa-solid", "fa-image", "iconeRemoveAfterUpload");
+                    document.getElementById("addPhotoBox").insertBefore(icone, document.querySelector(".labelRemoveAfterUpload"));
+                };
+
+                addPhotoBox.querySelector(".labelRemoveAfterUpload").classList.remove("displayNone");
+                addPhotoBox.querySelector(".inputRemoveAfterUpload").classList.remove("displayNone");
+                addPhotoBox.querySelector(".paragraphRemoveAfterUpload").classList.remove("displayNone");
+                document.getElementById("postForm").classList.replace("greenButton", "greyButton");
+
             } else if (response.status == 400 || response.status == 500) {
                 throw new Error("Erreur dans la saisie des informations.");
             } else if (response.status == 401) {

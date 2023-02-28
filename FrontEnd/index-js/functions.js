@@ -179,6 +179,24 @@ export function generateWorksForModal(works) {
 };
 
 /**
+ * Close the modal page
+ *
+ */
+export function closeModal() {
+    let modal = document.getElementById("modal");
+    if (modal === null) return;
+    modal.classList.add("displayNone");
+    modal.removeAttribute("arya-modal");
+    modal.setAttribute("arya-hidden", "true");
+    modal.removeEventListener("click", closeModal);
+    modal = null;
+
+    // Do not show thumbnail after closing
+    document.getElementById("photoToAdd").classList.add("displayNone");
+    document.getElementById("photoToAdd").dataset.previewPhoto = "";
+};
+
+/**
  * Generate the modal page
  *
  * @param {Iterable} filters objects collection retrieved from GET /api/categories
