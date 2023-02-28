@@ -6,7 +6,9 @@ import {
     generateWorksForModal,
     previewPhoto,
     switchToGreenTheValidateButton,
-    closeModal
+    closeModal,
+    generateWorksAfterFetch,
+    generateWorksForModalAfterFetch
 } from "./functions.js";
 
 // Recovery of the token if present
@@ -48,7 +50,7 @@ fetch("http://localhost:5678/api/works")
     generateWorksForModal(works);
 
     // Setting up the deletion of a project
-    const allTrashcan = document.querySelectorAll(".trashcan");
+    let allTrashcan = document.querySelectorAll(".trashcan");
     for (let trashcan of allTrashcan) {
         trashcan.addEventListener("click", function(e) {
             e.preventDefault();
@@ -64,6 +66,8 @@ fetch("http://localhost:5678/api/works")
                 if (response.ok) {
                     alert(`Projet supprimé !`);
                     closeModal();
+                    generateWorksAfterFetch();
+                    generateWorksForModalAfterFetch();
                 } else if (response.status == 500) {
                     alert("Erreur");
                 } else if (response.status == 401) {
@@ -165,7 +169,51 @@ addPhotoForm.addEventListener("submit", function(e) {
         .then(response => {
             if (response.ok) {
                 alert(`Projet \"${photoTitle}\" envoyé avec succès !`);
+
                 closeModal();
+                generateWorksAfterFetch();
+
+                fetch("http://localhost:5678/api/works")
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw Error("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
+                    };
+                })
+                .then(works => {
+                    document.getElementById("worksListToModif").innerHTML="";
+                    generateWorksForModal(works);
+
+                    // Setting up the deletion of a project
+                    let allTrashcan = document.querySelectorAll(".trashcan");
+                    for (let trashcan of allTrashcan) {
+                        trashcan.addEventListener("click", function(e) {
+                            e.preventDefault();
+
+                            let id = trashcan.dataset.trashcanId;
+                            fetch("http://localhost:5678/api/works/" + id, {
+                                method: "DELETE",
+                                headers: {
+                                    "authorization": `Bearer ${adminUser}`
+                                }
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert(`Projet supprimé !`);
+                                    closeModal();
+                                    generateWorksAfterFetch();
+                                    generateWorksForModalAfterFetch();
+                                } else if (response.status == 500) {
+                                    alert("Erreur");
+                                } else if (response.status == 401) {
+                                    alert("Suppression non autorisée.");
+                                }
+                            });
+                        });
+                    };
+                });
+
                 document.querySelector("#modalHomePage").classList.remove("displayNone");
                 document.querySelector("#modalAddPhotoPage").classList.add("displayNone");
                 document.querySelector(".arrow-left").classList.add("hidden");

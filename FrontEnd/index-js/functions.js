@@ -28,6 +28,47 @@ export function generateWorks(works) {
 };
 
 /**
+ * Generate projects after fetch
+ *
+ * @param {Iterable} works objects collection retrieved from GET /api/works
+ * @returns {void}
+ */
+export function generateWorksAfterFetch() {
+
+    fetch("http://localhost:5678/api/works")
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw Error("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
+        };
+    })
+    .then(works => {
+        document.querySelector(".gallery").innerHTML="";
+
+        // Generation of all works
+        for (let i = 0; i < works.length; i++) {
+
+            // Building a work
+            const imageWork = document.createElement("img");
+            // Remove error from image origin
+            imageWork.setAttribute("crossorigin", "anonymous");
+            imageWork.src = works[i].imageUrl;
+
+            const titleWork = document.createElement("figcaption");
+            titleWork.innerText = works[i].title;
+
+            // Attachment to the DOM
+            const figureWork = document.createElement("figure");
+            const sectionGallery = document.querySelector(".gallery");
+            figureWork.appendChild(imageWork);
+            figureWork.appendChild(titleWork);
+            sectionGallery.appendChild(figureWork);
+        };
+    });
+};
+
+/**
  * Generate filters at page load
  *
  * @param {Iterable} filters objects collection retrieved from GET /api/categories
@@ -176,6 +217,63 @@ export function generateWorksForModal(works) {
         figureWork.appendChild(editWork);
         worksListToModif.appendChild(figureWork);
     };
+};
+
+/**
+ * Generate works after fetch
+ *
+ * @param {Iterable} works objects collection retrieved from GET /api/works
+ * @returns {void}
+ */
+export function generateWorksForModalAfterFetch() {
+
+    fetch("http://localhost:5678/api/works")
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw Error("Impossible de charger les projets. Veuillez rafraichir la page ou réessayer ultérieurement.");
+        };
+    })
+    .then(works => {
+        document.getElementById("worksListToModif").innerHTML="";
+        // Generation of all works
+        for (let i = 0; i < works.length; i++) {
+
+            // Building a work
+            const imageWork = document.createElement("img");
+            // Remove error from image origin
+            imageWork.setAttribute("crossorigin", "anonymous");
+            imageWork.src = works[i].imageUrl;
+
+            // trash can icon for work deletion
+            const trashcan = document.createElement("i");
+            trashcan.classList.add("fa-regular", "fa-trash-can", "trashcan");
+            trashcan.dataset.trashcanId = works[i].id;
+
+            // "éditer" link
+            const editWork = document.createElement("a");
+            editWork.href = "#";
+            editWork.innerText = "éditer";
+
+            // 4 arrows icon
+            const arrow = document.createElement("i");
+            arrow.classList.add("fa-solid", "fa-arrows-up-down-left-right", "arrow");
+
+            // Attachment to the DOM
+            const figureWork = document.createElement("figure");
+            const worksListToModif = document.getElementById("worksListToModif");
+            figureWork.appendChild(imageWork);
+            // Adding the 4 arrows icon to the first work
+            if (i == 0) {
+                figureWork.appendChild(arrow);
+            };
+
+            figureWork.appendChild(trashcan);
+            figureWork.appendChild(editWork);
+            worksListToModif.appendChild(figureWork);
+        };
+    });
 };
 
 /**
